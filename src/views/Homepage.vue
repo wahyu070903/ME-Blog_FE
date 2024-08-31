@@ -1,4 +1,5 @@
 <template>
+    <!-- Begin of Recent Post Display-->
     <div class="w-full px-24 pt-10">
         <div class="flex flex-row justify-between">
             <div id="a" class="relative w-[720px] h-[460px] flex-shrink-0 rounded text-white">
@@ -16,18 +17,44 @@
                     <p class="text-2xl">NASA Set Coverage for ULA , Astrobotic Artemis Robotic Moon Launch</p>
                 </div>
             </div>
-            <div id="b" class="w-full">
+            <div id="b" class="w-full ml-12">
                 <div class="flex flex-row items-center">
                     <p>Aug 10, 2024</p>
                     <div class="w-[2px] h-[16px] mx-1.5 bg-base-yellow"></div>
                     <p>TECH</p>
                 </div>
                 <p>NASA has recently announced a significant coverage agreement with United Launch Alliance (ULA) and Astrobotic for the upcoming Artemis robotic moon launch. This collaboration marks a key milestone in the Artemis program, which aims to return humans to the Moon and establish a sustainable presence. The partnership will ensure comprehensive media coverage of the mission, highlighting the critical role of ULA's launch capabilities and Astrobotic's advanced lunar robotics. This strategic alignment underscores NASA's commitment to transparency and public engagement, while also showcasing the innovative technologies driving humanity’s next great leap into space.</p>
-                <button class="flex flex-row items-center">
-                    <p>More Details</p>
+                <button class="h-10 px-4 bg-base-yellow text-white flex flex-row items-center rounded-sm mt-10">
+                    <p class="mr-3.5">More Details</p>
                     <i class="bi bi-arrow-down-right-square-fill text-xl"></i>
                 </button>
             </div>
         </div>
     </div>
+    <!-- End of recent post display -->
+    
+    <div class="relative w-full mt-9 bg-[#EEEEEE]">
+        <div class="absolute top-14 left-16">
+            <i class="bi bi-stars text-2xl inline"></i>
+            <p class="inline mx-2">Featured</p>
+        </div>
+        <div class="px-24">
+            <Carousel />
+        </div>
+    </div>
 </template>
+
+<script>
+    import Carousel from '../components/Carousel.vue'
+
+    export default{
+        data(){
+            return {
+
+            }
+        }, 
+        components :{
+            Carousel : Carousel,
+        }
+    };
+</script>
