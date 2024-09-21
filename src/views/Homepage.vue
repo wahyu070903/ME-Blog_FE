@@ -33,19 +33,56 @@
     </div>
     <!-- End of recent post display -->
     
-    <div class="relative w-full mt-9 bg-[#EEEEEE]">
+    <!-- Carousel -->
+    <div class="relative mt-9 bg-[#EEEEEE]">
         <div class="absolute top-14 left-16">
             <i class="bi bi-stars text-2xl inline"></i>
             <p class="inline mx-2">Featured</p>
         </div>
-        <div class="px-24">
+        <div class="px-24 pt-24 flex justify-center">
             <Carousel />
+        </div>
+    </div>
+
+    <!-- Post Feed -->
+    <div>
+        <!-- important to change this top-[118px] to dynamic next -->
+        <div id="feedtitle" class="flex flex-row pl-16 mt-12 sticky top-[118px] z-40 bg-white py-2">  
+            <i class="bi bi-filter-circle-fill text-2xl"></i>
+            <div class="flex flex-col items-start mx-2">
+                <p class="text-xl">Post Feed</p>
+                <p class="text-sm">THERE IS 1024 POST NOW</p>
+            </div>
+        </div>
+        <div class="ml-20 mt-9 flex flex-row">
+            <div>
+                <LargeFeedBoard />
+                <SmallFeedBoard />
+                <SmallFeedBoard />
+                <LargeFeedBoard />
+                <SmallFeedBoard />
+                <SmallFeedBoard />
+            </div>
+            <div class="ml-24">
+                <SideBoard />
+                <SideBoard />
+            </div>
         </div>
     </div>
 </template>
 
+<style>
+    .__sticked{
+        border-bottom: 1px solid #cccccc;
+    }
+</style>
+
 <script>
     import Carousel from '../components/Carousel.vue'
+    import LargeFeedBoard from '../components/FeedBoardLarge.vue'
+    import SmallFeedBoard from '../components/FeedBoardSmall.vue'
+    import SideBoard from '../components/FeedSideBoard.vue'
+    import anime from 'animejs/lib/anime.es.js';
 
     export default{
         data(){
@@ -55,6 +92,28 @@
         }, 
         components :{
             Carousel : Carousel,
+            LargeFeedBoard : LargeFeedBoard,
+            SmallFeedBoard : SmallFeedBoard,
+            SideBoard : SideBoard
+        },
+        mounted(){
+            window.addEventListener("scroll", this.scrollObserver)
+        },
+        methods : {
+            scrollObserver(){
+                const nav = document.getElementById("navbar")
+                const nav_height = nav.getBoundingClientRect().height
+                const stream_title = document.getElementById("feedtitle")
+                const stream_title_top = stream_title.getBoundingClientRect().top
+
+                if(stream_title_top <= nav_height){
+                    stream_title.classList.add("__sticked")
+                }else{
+                    stream_title.classList.remove("__sticked")
+                }
+
+                console.log("scrolled")
+            }
         }
     };
 </script>
