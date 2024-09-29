@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-row items-center">
-        <button class="px-1.5 py-10 rounded mr-8 bg-base-yellow" @click="goToPrev">
+        <button class="hidden md:block px-1.5 py-10 rounded mr-8 bg-base-yellow" @click="goToPrev">
             <i class="bi bi-chevron-left text-[32px] text-white"></i>
         </button>
         <Splide :options="options" aria-label="My Favorite Images" ref="splide">
@@ -8,7 +8,7 @@
                 <Card :img_src = data.img :post_date = data.post :post_title = data.title :post_desc = data.desc :read_time = data.rTime />
             </SplideSlide>
         </Splide>
-        <button class="px-1.5 py-10 rounded ml-8 bg-base-yellow" @click="goToNext">
+        <button class="hidden md:block px-1.5 py-10 rounded ml-8 bg-base-yellow" @click="goToNext">
             <i class="bi bi-chevron-right text-[32px] text-white"></i>
         </button>
     </div>

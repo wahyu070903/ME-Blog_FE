@@ -38,8 +38,6 @@
     </div>
 </template>
 
-<script>
-</script>
 
 <style>
     #title::first-line {

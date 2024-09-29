@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex flex-row w-[33.5rem]">
+    <div class="relative flex flex-row w-[33.5rem] h-fit">
         <div class="flex items-center">
             <p class="__tags inline">TECHNOLOGY</p>
             <div class="w-1 h-[124px] bg-base-yellow inline-block ml-1"></div>

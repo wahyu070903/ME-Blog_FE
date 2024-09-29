@@ -14,12 +14,14 @@ export default {
       },
       boxShadow: {
         'inner-recent-post': 'inset 200px 4px 250px rgba(0, 0, 0, 0.8)',
+        'inner-recent-post-mobile': 'inset 0px 0px 250px 12px rgba(0, 0, 0, 0.64)',
         'inner-large-streamcard' : 'inset 0px -120px 250px -8px rgba(0, 0, 0, 0.8)',
         'inner-small-streamcard' : 'inset 0px 0px 31.4px 4px rgba(0,0,0,0.2)',
         'inner-side-streamcard' : 'inset 0px 0px 20px 2px rgba(0,0,0,0.12)',
       },
       fontFamily: {
-        NotoSans: ['Noto Sans', 'sans-serif'],
+        notoSans: ['Noto Sans', 'sans-serif'],
+        bayon : ['Bayon', 'sans-serif'],
       },
     },
   },
