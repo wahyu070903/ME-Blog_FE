@@ -4,8 +4,8 @@
             <i class="bi bi-chevron-left text-[32px] text-white"></i>
         </button>
         <Splide :options="options" aria-label="My Favorite Images" ref="splide">
-            <SplideSlide v-for="count in 6" class="w-auto ">
-                <Card />
+            <SplideSlide v-for="data in carousel_data" class="w-auto ">
+                <Card :img_src = data.img :post_date = data.post :post_title = data.title :post_desc = data.desc :read_time = data.rTime />
             </SplideSlide>
         </Splide>
         <button class="px-1.5 py-10 rounded ml-8 bg-base-yellow" @click="goToNext">
@@ -24,7 +24,12 @@
             SplideSlide,
             Card
         },
-
+        props : {
+            carousel_data : {
+                type : Object,
+                required : true,
+            }
+        },
         setup() {
             const options = {
                 rewind : false,

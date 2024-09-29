@@ -2,12 +2,12 @@
     <div class="flex flex-col w-[308px] rounded">
         <img :src="img_path + img_src" class="w-full h-[180px] object-cover rounded">
         <div class="flex flex-col px-5 pt-3 bg-white">
-            <p class="text-xs">Aug 20, 2024</p>
-            <p class="text-xl mt-1.5">Advancing Telepresence and Next-Generation Digital Humans with NVIDIA Maxine</p>
-            <p class="text-sm mt-2">At SIGGRAPH 2024 this week, NVIDIA is showcasing the latest advancements in the NVIDIA Maxine AI developer platform, available through NVIDIA AI...</p>
-            <div class="flex flex-row items-center mt-7">
+            <p class="text-xs">{{  post_date }}</p>
+            <p class="text-xl mt-1.5"> {{ post_title }} </p>
+            <p class="text-sm mt-2"> {{post_desc}} </p>
+            <div class="flex flex-row items-center mt-7 mb-4">
                 <i class="bi bi-clock-history"></i>
-                <p class="text-sm">5 MIN READ</p>
+                <p class="text-sm mx-1">{{ read_time }} MIN READ</p>
             </div>
         </div>
     </div>

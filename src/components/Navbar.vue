@@ -25,19 +25,19 @@
             <div class="px-24 h-14 w-screen flex flex-row items-center justify-between border border-[#CCCCCC] bg-white z-50">
                 <div class="flex flex-row items-center text-lg">
                     <p class="mr-6 font-NotoSans">BLOG</p>
-                    <button class="mr-4 px-4 py-1.5 rounded-sm hover:bg-gray-100 duration-200">
+                    <button class="mr-4 px-4 py-1.5 rounded-sm hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 duration-200">
                         <p>Features</p>
                     </button>
-                    <button class="mr-4 px-4 py-1.5 rounded-sm hover:bg-gray-100 duration-200">
+                    <button class="mr-4 px-4 py-1.5 rounded-sm hover:bg-gray-100 duration-200 focus:ring-4 focus:outline-none focus:ring-gray-100">
                         <p>Features</p>
                     </button>
-                    <button id="tools-menu-full-dropdown-button" data-target="tools-menu-full-dropdown" aria-expanded="false" @click="expandMenus" class="mr-4 flex flex-row items-start px-4 py-1.5 rounded-sm hover:bg-gray-100 duration-200">
+                    <button id="tools-menu-full-dropdown-button" data-target="tools-menu-full-dropdown" aria-expanded="false" @click="expandMenus" class="mr-4 flex flex-row items-start px-4 py-1.5 rounded-sm hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 duration-200">
                         <p class="mr-1.5">Toolbox</p>
                         <i class="__expandicon bi bi-chevron-down text-sm mt-1.5 transition-transform duration-200"></i>
                     </button>
                 </div>
                 <div class="flex flex-row items-center">
-                    <button @click="expandMenus" data-target="category-menu-full-dropdown" class="flex flex-row items-start px-4 py-1.5 rounded-sm hover:bg-gray-100 duration-200">
+                    <button @click="expandMenus" data-target="category-menu-full-dropdown" class="flex flex-row items-start px-4 py-1.5 rounded-sm hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 duration-200">
                         <p class="mr-1.5 text-lg">Category</p>
                         <i class="__expandicon bi bi-chevron-down text-sm mt-1.5 transition-transform duration-200"></i>
                     </button>
@@ -159,31 +159,47 @@
                 </div>
             </div>
         </div>
-        <div class="w-screen flex flex-wrap items-center justify-between mx-auto py-4 px-12 bg-base-navy md:hidden">
+        <div class="w-screen flex flex-wrap items-center justify-between py-4 px-6 bg-base-navy md:hidden">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img class="h-9 w-auto" src="../assets/app_icons/logoipsum.svg" draggable="false">
             </a>
             <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
             </button>
-            <div class="hidden w-full" id="navbar-hamburger">
-            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                <li>
-                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600" aria-current="page">Home</a>
-                </li>
-                <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Services</a>
-                </li>
-                <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Pricing</a>
-                </li>
-                <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Contact</a>
-                </li>
-            </ul>
+            <div class="hidden w-full py-4" id="navbar-hamburger">
+                <form class="max-w-md mx-auto">   
+                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Post, Article..." required />
+                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                    </div>
+                </form>
+
+                <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Feature</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Feature</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Toolbox</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Category</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -199,6 +215,7 @@
             return{
                 active_expand_menus : null,
                 active_expand_btn   : null,
+                collapse_finish     : false,
             }
         },
         mounted(){
@@ -216,7 +233,10 @@
                         translateY: ['0%', '-100%'],
                         duration: 800,
                         opacity: [1, 0.8],
-                        easing: 'easeOutExpo'
+                        easing: 'easeOutExpo',
+                        complete : ()=>{
+                            this.collapse_finish = true
+                        }
                     })
                     this.active_expand_btn = null
                     this.active_expand_menus = null
