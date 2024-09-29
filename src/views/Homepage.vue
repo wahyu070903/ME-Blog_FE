@@ -2,7 +2,7 @@
     <!-- Begin of Recent Post Display-->
     <div id="recent-post" class="w-full pt-0 md:px-24 md:pt-10 overflow-hidden">
         <div class="md:flex md:flex-row md:justify-between">
-            <div id="recent-image" class="relative aspect-[720/460] md:max-w-[720] md:max-h-[460px] flex-shrink-0 rounded text-white">
+            <div id="recent-image" class="relative aspect-[720/460] md:w-auto md:h-auto md:max-w-[720px] md:max-h-[460px] md:min-w-80 rounded text-white bg-green-400">
                 <div class="absolute top-0 left-0 w-full h-full shadow-inner-recent-post-mobile md:shadow-inner-recent-post z-100 md:rounded"></div>
                 <img class="w-full h-full object-cover md:rounded" src="../assets/images/astrobotic-photo.webp">
                 <div class="absolute top-2.5 left-2.5 md:top-4 md:left-6 flex flex-row items-center">
@@ -20,7 +20,7 @@
                     <i class="bi bi-arrow-down-right-square-fill text-md"></i>
                 </button>
             </div>
-            <div id="recent-info" class="mt-2 px-6 md:px-0 md:mt-0 w-full md:ml-12">
+            <div id="recent-info" class="mt-2 px-6 w-full md:min-w-80 md:px-0 md:mt-0 md:ml-12 flex-1">
                 <div class="flex flex-row items-center">
                     <p class="text-sm md:text-base">Aug 10, 2024</p>
                     <div class="w-[2px] h-[16px] mx-1.5 bg-base-yellow"></div>
@@ -97,9 +97,9 @@
         border-bottom: 1px solid #cccccc;
     }
     .__recentInfoClamp{
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 5;
+        display : -webkit-box;
+        -webkit-box-orient : vertical;
+        -webkit-line-clamp : 5;
     }
 </style>
 
