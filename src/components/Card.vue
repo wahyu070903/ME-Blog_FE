@@ -1,13 +1,13 @@
 <template>
-    <div class="flex flex-col w-[200px] md:w-[308px] rounded">
-        <img :src="img_path + img_src" class="w-full h-[120px] md:h-[180px] object-cover rounded">
-        <div class="flex flex-col px-5 pt-1.5 md:pt-3 bg-white">
-            <p class="text-[6px] md:text-xs">{{  post_date }}</p>
-            <p class="text-[10px] md:text-xl mt-[3px] md:mt-1.5"> {{ post_title }} </p>
-            <p class="text-[8px] md:text-sm mt-1 md:mt-2"> {{post_desc}} </p>
-            <div class="flex flex-row items-center mt-2 mb-2 md:mt-7 md:mb-4">
-                <i class="text-[8px] md:text-base bi bi-clock-history"></i>
-                <p class="text-[6px] font-bold md:text-sm mx-1">{{ read_time }} MIN READ</p>
+    <div class="flex flex-col max-w-80 rounded drop-shadow-md">
+        <img :src="img_path + img_src" class="w-full aspect-[320/192] object-cover rounded-t">
+        <div class="flex flex-col px-3 bg-white">
+            <p class="font-spartan leading-1 font-medium text-xs mt-3">{{  post_date }}</p>
+            <p class="font-spartan font-medium text-base mt-2 leading-none"> {{ post_title }} </p>
+            <p class="font-libre text-xs mt-2"> {{post_desc}} </p>
+            <div class="flex flex-row items-end mt-2 mb-3">
+                <i class="text-xs bi bi-clock-history"></i>
+                <p class=" text-center font-medium text-xs mx-1">{{ read_time }} MIN READ</p>
             </div>
         </div>
     </div>

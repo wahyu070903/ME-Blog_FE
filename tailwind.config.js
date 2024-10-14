@@ -20,7 +20,8 @@ export default {
         'inner-side-streamcard' : 'inset 0px 0px 20px 2px rgba(0,0,0,0.12)',
       },
       fontFamily: {
-        notoSans: ['Noto Sans', 'sans-serif'],
+        spartan : ['League Spartan', 'sans-serif'],
+        libre : ['Libre Baskerville', 'serif'],
         bayon : ['Bayon', 'sans-serif'],
       },
     },

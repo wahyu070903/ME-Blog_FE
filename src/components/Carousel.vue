@@ -5,8 +5,12 @@
         </button>
         <div class="w-full">
             <Splide :options="options" aria-label="My Favorite Images" ref="splide">
-                <SplideSlide v-for="data in carousel_data" >
+                <SplideSlide v-for="data in carousel_data" class="my-1">
                     <Card :img_src = data.img :post_date = data.post :post_title = data.title :post_desc = data.desc :read_time = data.rTime />
+                </SplideSlide>
+                <!-- Hidden element to center last card -->
+                <SplideSlide>
+                    <div class="hidden"></div>
                 </SplideSlide>
             </Splide>
         </div>
@@ -35,18 +39,17 @@
         },
         setup() {
             const options = {
-                rewind : false,
                 perPage : 3,
                 perMove : 1,
-                gap : '1px',
+                gap : '1rem',
                 arrows: false,
                 pagination : false,
-                focus : 'center',
-                trimSpace  : false,
+                focus  : 'center',
                 breakpoints : {
                     640 : {
                         perPage : 2,
-                        gap : '1rem'
+                        gap : '0.5rem',
+                        
                     }
                 }
             };
@@ -66,4 +69,6 @@
 
 <style>
     @import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+
+   
 </style>
