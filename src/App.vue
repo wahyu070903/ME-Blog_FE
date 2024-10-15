@@ -8,5 +8,6 @@
   <div class="mt-[72px] md:mt-[118px] overflow-hidden">
     <RouterView />
   </div>
+  <Footer />
   
 </template>

@@ -1,73 +1,69 @@
 <template>
-    <div class="relative w-[34rem] pt-4 pb-8 rounded-t-md rounded-bl-md" :class="card_color">
-        <div class="flex flex-row items-center justify-between text-sm mx-6">
-            <p>{{ card_topic }}</p>
-            <button>
-                <p class="underline">SEE ALL {{ card_topic }}</p>
-            </button>
-        </div>
-        <p class="text-4xl w-[80%] mt-3 ml-10 font-bold font-notoSans">{{ card_data[0].title }}</p>
-        <div class="flex flex-row items-center justify-between mt-4">
-            <p class="ml-10">{{ card_data[0].date }}</p>
-            <div class="mr-32">
-                <button>
-                    <i class="bi bi-hand-thumbs-up inline"></i>
-                    <p class="inline ml-1">{{ card_data[0].likes }}</p>
-                </button>
-                <button class="ml-5">
-                    <i class="bi bi-chat-left-dots inline"></i>
-                    <p class="inline ml-1">{{ card_data[0].comments }}</p>
-                </button>
+    <div class="w-full flex justify-end items-end">
+        <div class="relative max-w-[294px] h-auto bg-base-yellow pt-3 px-3 my-8 rounded-t-md rounded-bl-md">
+            <div class="flex flex-row items-center justify-between">
+                <p class="text-xs">TECHNOLOGY</p>
+                <a href="#" class="text-xs underline decoration-1">SEE ALL TECHNOLOGY</a>
             </div>
-        </div>
-        <div class="relative w-[74%] h-[15rem] rounded-[4px] mt-3.5 ml-5">
-            <div class="absolute w-full h-full top-0 left-0 shadow-inner-side-streamcard"></div>
-            <img class="w-full h-full object-cover rounded-[4px]" :src="img_path + card_data[0].img">
-        </div>
-        <div class="flex flex-col mt-8">
-            <div class="w-[66%] flex flex-row ml-9 mb-2">
-                <i class="bi bi-2-circle-fill text-2xl mr-3.5 text-white"></i>
-                <div class="w-[90%] flex flex-col">
-                    <p class="text-base">{{ card_data[1].title }}</p>
-                    <div class="flex flex-row items-center mt-1.5">
-                        <p class="text-xs">{{ card_data[1].date }}</p>
-                        <button class="ml-4">
-                            <i class="bi bi-hand-thumbs-up inline text-xs"></i>
-                            <p class="inline ml-1 text-xs">{{ card_data[1].likes }}</p>
-                        </button>
-                        <button class="ml-5">
-                            <i class="bi bi-chat-left-dots inline text-xs"></i>
-                            <p class="inline ml-1 text-xs">{{ card_data[1].comments }}</p>
-                        </button>
+            <div class="w-[82%] ml-3 mt-3.5">
+                <p class="w-full text-2xl font-bold font-spartan leading-6 line-clamp-3">​​Real-Time AI Shark Detection is Boosting Beach Safety</p>
+            </div>
+            <div class="mt-6 max-w-[222px]">
+                <div class="flex flex-row items-center justify-between">
+                    <p class="text-xs">Aug 10, 2024</p>
+                    <div class="flex flex-row items-center">
+                        <div class="flex flex-row items-center">
+                            <i class="bi bi-hand-thumbs-up text-xs"></i>
+                            <p class="text-xs mx-1">10</p>
+                        </div>
+                        <div class="flex flex-row items-center ml-2">
+                            <i class="bi bi-chat-left-dots text-xs"></i>
+                            <p class="text-xs ml-1">10</p>
+                        </div>
+                    </div>
+                </div>
+                <img src="../assets/images/shark.gif" class="w-full h-full aspect-[222/142] rounded-[4px] mt-1.5">
+            </div>
+            <div class="w-11/12">
+                <div v-for="items in 2">
+                    <div :class="items == 1 ? '__first-card':''" class="flex flex-row items-start py-3">
+                        <i class="bi bi-2-circle-fill text-[22px] text-white"></i>
+                        <div class="flex flex-col mx-2">
+                            <p class="text-base font-spartan font-medium leading-4 line-clamp-3">Build VLM-Powered Visual AI Agents Using NVIDIA NIM and NVIDIA VIA Microservices</p>
+                            <div class="flex flex-row items-center mt-1.5">
+                                <p class="text-xs font-spartan">Aug 20, 2024</p>
+                                <div class="flex flex-row items-center ml-3.5">
+                                    <div class="flex flex-row items-center">
+                                        <i class="bi bi-hand-thumbs-up text-xs font-spartan"></i>
+                                        <p class="text-xs mx-1 font-spartan">10</p>
+                                    </div>
+                                    <div class="flex flex-row items-center ml-2">
+                                        <i class="bi bi-chat-left-dots text-xs font-spartan"></i>
+                                        <p class="text-xs ml-1 font-spartan">10</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="w-[22rem] h-0.5 bg-white"></div>
-            <div class="w-[66%] flex flex-row ml-9 mt-2 mb-2">
-                <i class="bi bi-3-circle-fill text-2xl mr-3.5 text-white"></i>
-                <div class="w-[90%] flex flex-col">
-                    <p class="text-base">{{ card_data[2].title }}</p>
-                    <div class="flex flex-row items-center mt-1.5">
-                        <p class="text-xs">{{ card_data[2].date }}</p>
-                        <button class="ml-4">
-                            <i class="bi bi-hand-thumbs-up inline text-xs"></i>
-                            <p class="inline ml-1 text-xs">{{ card_data[2].likes }}</p>
-                        </button>
-                        <button class="ml-5">
-                            <i class="bi bi-chat-left-dots inline text-xs"></i>
-                            <p class="inline ml-1 text-xs">{{ card_data[2].comments }}</p>
-                        </button>
-                    </div>
-                </div>
+            <div class="absolute top-9 left-0 -translate-x-full">
+                <p class="__jumbo-label font-bayon text-[64px] leading-10">TECHNOLOGY</p>
             </div>
         </div>
-        <p class="__topic absolute bottom-0 -right-4 text-8xl opacity-20 leading-no font-bayon">{{ card_topic }}</p>
     </div>
 </template>
 
 <style>
     .__topic{
         writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+    .__first-card{
+        border-bottom: 2px solid white;
+    }
+    .__jumbo-label{
+        writing-mode: vertical-lr;
         transform: rotate(180deg);
     }
 </style>

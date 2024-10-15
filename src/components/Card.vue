@@ -2,10 +2,10 @@
     <div class="flex flex-col max-w-80 rounded drop-shadow-md">
         <img :src="img_path + img_src" class="w-full aspect-[320/192] object-cover rounded-t">
         <div class="flex flex-col px-3 bg-white">
-            <p class="font-spartan leading-1 font-medium text-xs mt-3">{{  post_date }}</p>
-            <p class="font-spartan font-medium text-base mt-2 leading-none"> {{ post_title }} </p>
-            <p class="font-libre text-xs mt-2"> {{post_desc}} </p>
-            <div class="flex flex-row items-end mt-2 mb-3">
+            <p class="font-medium text-xs mt-3">{{  post_date }}</p>
+            <p class="font-spartan font-medium text-xl mt-2 leading-5 line-clamp-3"> {{ post_title }} </p>
+            <p class="font-libre text-base mt-2 line-clamp-5"> {{post_desc}} </p>
+            <div class="flex flex-row items-end mt-2.5 mb-3">
                 <i class="text-xs bi bi-clock-history"></i>
                 <p class=" text-center font-medium text-xs mx-1">{{ read_time }} MIN READ</p>
             </div>

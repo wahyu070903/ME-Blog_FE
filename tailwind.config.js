@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'base-yellow' : '#FFA116',
+        'base-yellow' : '#FFA500',
         'base-navy'   : '#05192D',
         'base-blue'   : '#3879F3'
       },

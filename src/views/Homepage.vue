@@ -14,10 +14,10 @@
                     <p class="__highlighted text-2xl font-bold leading-3 text-black underline decoration-1">NASA Set Coverage for ULA , Astrobotic Artemis Robotic Moon Launch</p>
                 </div>
                 <div class="font-libre w-[90%] mt-3">
-                    <p class="text-xs">
+                    <p class="text-base">
                         NASA has recently announced a significant coverage agreement with United Launch Alliance (ULA) and Astrobotic for the upcoming Artemis robotic moon launch. This collaboration marks a key milestone.
                         <br>
-                            <p class="text-xs text-base-yellow">Read More ...</p>
+                            <p class="text-base text-base-yellow">Read More ...</p>
                         </br>
                     </p>
                 </div>
@@ -25,7 +25,7 @@
             <img class="w-full h-full object-cover" src="../assets/images/astrobotic-photo.webp">
         </div>
     </div>
-    <div class="mt-36 w-full">
+    <div class="mt-56 w-full">
         <div class="flex flex-row justify-between items-center font-spartan ml-7 mr-3">
             <div class="flex flex-row items-center">
                 <i class="bi bi-stars text-base"></i>
@@ -51,12 +51,33 @@
                 <p class="text-xs">THERE IS 1024 POST NOW</p>
             </div>
         </div>
-        <div id="post-feed">
+        <div id="post-feed" class="pb-2">
             <LargeFeed />
             <SmallFeed />
             <SmallFeed />
             <SideFeed card_topic="Technology" card_color="base-yellow" :card_data="side_data" />
+            <DetailedFeed />
+            <SmallFeed />
+            <SmallFeed />
+            <LargeFeed />
+            <SideFeed card_topic="Electronics" card_color="base-blue" :card_data="side_data" />
+            <SmallFeed />
+            <SmallFeed />
+            <DetailedFeed />
+            <SmallFeed />
+            <LargeFeed />
+            <SmallFeed />
+            <SmallFeed />
         </div>
+        <div class="flex items-center justify-center mt-3">
+            <a href="#" class="font-medium underline decoration-base-yellow decoration-[2px]">
+                READ MORE
+            </a>
+        </div>
+        <div class=".__ads-banner w-full max-h-40 rounded-[4px] mt-9 ">
+            <div class="w-full h-40 bg-[#D9D9D9] rounded-[4px]"></div>
+        </div>
+        <SupportCard />
     </div>
 </template>
 
@@ -76,10 +97,12 @@
 </style>
 
 <script>
-    import Carousel from '../components/Carousel.vue'
-    import LargeFeed from '../components/FeedBoardLarge.vue'
-    import SmallFeed from '../components/FeedBoardSmall.vue'
-    import SideFeed from '../components/FeedSideBoard.vue'
+    import Carousel from '@/components/Carousel.vue'
+    import LargeFeed from '@/components/FeedBoardLarge.vue'
+    import SmallFeed from '@/components/FeedBoardSmall.vue'
+    import SideFeed from '@/components/FeedSideBoard.vue'
+    import DetailedFeed from '@/components/FeedDetailed.vue'
+    import SupportCard from '@/components/SupportCard.vue'
 
     export default{
         components : {
@@ -87,6 +110,8 @@
             LargeFeed,
             SmallFeed,
             SideFeed,
+            DetailedFeed,
+            SupportCard,
 
         },
         data(){

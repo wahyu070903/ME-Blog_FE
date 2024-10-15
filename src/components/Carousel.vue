@@ -44,7 +44,6 @@
                 gap : '1rem',
                 arrows: false,
                 pagination : false,
-                focus  : 'center',
                 breakpoints : {
                     640 : {
                         perPage : 2,

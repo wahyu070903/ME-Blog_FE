@@ -21,7 +21,7 @@
                         <p class="__highlighted text-2xl font-bold leading-3 text-black underline decoration-1">Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.</p>
                     </div>
                     <div class="w-full mt-3">
-                        <p>Expanding the open-source Meta Llama collection of models, the Llama 3.2 collection includes vision language models (VLMs), small language models (SLMs), and an updated Llama Guard model with support for vision.</p>
+                        <p class="font-libre">Expanding the open-source Meta Llama collection of models, the Llama 3.2 collection includes vision language models (VLMs), small language models (SLMs), and an updated Llama Guard model with support for vision.</p>
                     </div>
                 </div>
                 <div class="mt-3.5 w-full flex felx-row items-center">
