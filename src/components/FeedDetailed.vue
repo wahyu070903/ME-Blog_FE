@@ -5,19 +5,19 @@
         </div>
         <div class="w-full">
             <div class="w-full flex flex-row items-center">
-                <p class="text-xs font-base">Aug 24, 2024</p>
+                <p class="text-xs font-base">{{ formattedDate }}</p>
                 <div class="flex flex-row items-center ml-11">
                     <i class="bi bi-clock-history text-xs"></i>
-                    <p class="text-xs mx-1 font-base">5 MIN READ</p>
+                    <p class="text-xs mx-1 font-base">{{ rtime }} MIN READ</p>
                 </div>
             </div>
             <div class="mt-1">
                 <p class="leading-5 line-clamp-[10]">
                     <span class="font-spartan text-lg font-semibold leading-3">
-                        Computed Tomography Organ and Disease Segmentation Using the NVIDIA VISTA-3D NIM Microservice.
+                        {{ title }}
                     </span>
                     <span class="font-libre">
-                        Globally, over 300 million CT scans are performed annually, with 85 million in the US. This high volume drives radiologists to find ways to streamline their workflow and improve efficiency in order to handle the increasing demand for accurate and timely diagnostic imaging,  This high volume drives radiologists to find ways to streamline their workflow and improve efficiency in order to handle the increasing demand for accurate and timely diagnostic imaging
+                        {{ description }}
                     </span>
                 </p>
             </div>
@@ -43,9 +43,42 @@
     </div>
 </template>
 
-<style>
-
-</style>
 <script>
-
+    export default{
+        data(){
+            return {
+                img_path : '/src/assets/images/',
+                month_format : {
+                    1 : "Jan",
+                    2 : "Feb",
+                    3 : "Mar",
+                    4 : "Apr",
+                    5 : "May",
+                    6 : "Jun",
+                    7 : "Jul",
+                    8 : "Aug",
+                    9 : "Sep",
+                    10 : "Okt",
+                    11 : "Nov",
+                    12 : "Des",
+                },
+            }
+        },
+        props: {
+            title : String,
+            description : String,
+            post_date : String,
+            tag : String,
+            thumbnail : String,
+            rtime : Number,
+            image_src : String,
+        },
+        computed: {
+            formattedDate(){
+                let [year_now, month_now, day_now] = this.post_date.split("-");
+                month_now = parseInt(month_now);
+                return `${this.month_format[month_now]} ${day_now}, ${year_now}`;
+            }
+        }
+    }
 </script>
