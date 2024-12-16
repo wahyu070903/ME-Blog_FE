@@ -84,6 +84,7 @@
         <div id="post-feed" class="pb-2">
             <div v-for="(type, index) in feedPattern">
                 <DetailedFeed v-if="type == 'embed'"
+                    :post_id="feed[index].id"
                     :title="feed[index].title" 
                     :description="feed[index].description" 
                     :post_date="feed[index].post_at" 
@@ -93,6 +94,7 @@
                     :image_src="feed[index].thumbnail" />
 
                 <LargeFeed v-else-if="type == 'large'" 
+                    :post_id="feed[index].id"
                     :title="feed[index].title" 
                     :description="feed[index].description" 
                     :post_date="feed[index].post_at" 
@@ -101,6 +103,7 @@
                     :tag="feed[index].tag" />
 
                 <SmallFeed v-else 
+                    :post_id="feed[index].id"
                     :title="feed[index].title"
                     :post_date="feed[index].post_at" 
                     :rtime="feed[index].rtime" 
