@@ -1,20 +1,46 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Homepage from '../views/Homepage.vue'
-import Post from '../views/Post.vue'
+// import pages
+import Blog from '@/pages/BlogPages.vue'
+import AdminPanel from '@/pages/AdminPages.vue'
+// import views
+import Homepage from '../pages/views/Homepage.vue'
+import Post from '../pages/views/Post.vue'
+import Editor from '@/pages/views/Editor.vue'
+import PostList from '@/pages/views/PostList.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: "/",
-            name: "homepage",
-            component: Homepage
+            name: "main-app",
+            component: Blog,
+            children: [
+                {
+                    path: "",
+                    name: "homepage",
+                    component: Homepage
+                },
+                {
+                    path: "/post/:id",
+                    name: "post",
+                    component : Post
+                }      
+            ]
         },
         {
-            path: "/post/:id",
-            name: "post",
-            component : Post
-        },
+            path: "/dashboard",
+            name: "admin-panel",
+            component: AdminPanel,
+            children: [
+                {
+                    path: "",
+                    name: 'postList',
+                    component: PostList
+                }
+            ]
+        }
+
     ] 
 })
 

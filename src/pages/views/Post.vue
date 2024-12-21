@@ -7,7 +7,7 @@
         </div>
         <!-- Thumbnail -->
         <div class="max-w-full h-auto ratio-[1/4] rounded">
-            <img src="../assets/images/astrobotic-photo.webp" class="w-full h-full object-cover rounded">
+            <img src="../../assets/images/astrobotic-photo.webp" class="w-full h-full object-cover rounded">
         </div>
         <div id="__content" class="text-sm font-libre mt-6 mb-2">
             <p>
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-    import Comments from '../components/Comment.vue'
+    import Comments from '@/components/Comment.vue'
     export default {
         components: {
             Comments,

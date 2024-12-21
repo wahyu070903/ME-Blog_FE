@@ -213,7 +213,7 @@
                 });
             },
             getImageUrl(img_name){
-                return new URL(`../assets/images/${img_name}`, import.meta.url);
+                return new URL(`../../assets/images/${img_name}`, import.meta.url);
             }
         },
         computed :{
