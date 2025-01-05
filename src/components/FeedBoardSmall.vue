@@ -60,7 +60,7 @@ import { RouterLink } from 'vue-router';
             }
         },
         props: {
-            post_id : String,
+            post_id : Number,
             title : String,
             post_date : String,
             tag : String,

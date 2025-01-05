@@ -44,7 +44,7 @@
             }
         },
         props : {
-            post_id : String,
+            post_id : Number,
             img_src : {
                 type : String,
                 default : 'nvidia-maxine-3d-featured.gif'

@@ -5,14 +5,14 @@ import AdminPanel from '@/pages/AdminPages.vue'
 // import views
 import Homepage from '../pages/views/Homepage.vue'
 import Post from '../pages/views/Post.vue'
-import Editor from '@/pages/views/Editor.vue'
 import PostList from '@/pages/views/PostList.vue'
+import PostCreate from '@/pages/views/PostCreate.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: "/",
+            path: "",
             name: "main-app",
             component: Blog,
             children: [
@@ -22,7 +22,7 @@ const router = createRouter({
                     component: Homepage
                 },
                 {
-                    path: "/post/:id",
+                    path: "post/:id",
                     name: "post",
                     component : Post
                 }      
@@ -37,6 +37,11 @@ const router = createRouter({
                     path: "",
                     name: 'postList',
                     component: PostList
+                },
+                {
+                    path: "create",
+                    name: "postcreate",
+                    component: PostCreate
                 }
             ]
         }
