@@ -1,5 +1,5 @@
 <template>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto">
         <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
             <div class="flex flex-row items-center space-x-4">
                 <div>
@@ -206,8 +206,6 @@
 
 <script>
     import axios from 'axios';
-    import { Modal } from 'flowbite';
-import { withScopeId } from 'vue';
 
     export default{
         data(){
@@ -220,7 +218,7 @@ import { withScopeId } from 'vue';
                 paginate_totalItems: null,
                 paginate_totalPaginateButton: null,
                 max_visible_paginate: 5,
-                
+            
                 // Modal 
                 deleteModal: null,
 
@@ -340,6 +338,6 @@ import { withScopeId } from 'vue';
                     }
                 })
             },
-        }
+        },
     }
 </script>

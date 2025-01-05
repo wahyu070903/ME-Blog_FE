@@ -1,5 +1,5 @@
 <template>
-    <RouterLink :to="'/posts/' + post_id">
+    <RouterLink :to="'/post/' + post_id">
         <div ref="feedElement" class="hover:bg-gray-500/10">
             <div class="relative w-full flex flex-col justify-center items-center pt-4 px-2">
                 <div class="relative w-full h-full">
@@ -109,7 +109,7 @@ import { RouterLink } from 'vue-router';
             }
         },
         props: {
-            post_id : String,
+            post_id : Number,
             title : String,
             description : String,
             post_date : String,
