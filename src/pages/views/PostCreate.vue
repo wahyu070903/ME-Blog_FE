@@ -1,13 +1,15 @@
 <template>
-    <ckeditor
-        v-model="data"
-        :editor="ClassicEditor"
-        :config="config"
-        @destroy="onEditorDestroy"
-    />
+    <!-- this shit should wrap in <div> dude i did'nt know why -->
+    <div class="">  
+        <ckeditor
+            v-bind="data"
+            :editor="ClassicEditor"
+            :config="config"
+        />
+    </div>
 </template>
+
 <style>
-    /* Add this in your CSS file or in a <style> block */
     .ck-content h1 {
         font-size: 2em;
         font-weight: bold;
@@ -20,11 +22,11 @@
         margin: 1em 0;
     }
     .ck-content h3 {
-        font-size: 1.25em; /* Adjust the font size */
-        font-weight: bold; /* Make it bold */
-        color: #333; /* Choose a color */
-        margin: 0.75em 0; /* Add spacing above and below */
-        line-height: 1.4; /* Adjust line height for better readability */
+        font-size: 1.25em; 
+        font-weight: bold; 
+        color: #333; 
+        margin: 0.75em 0; 
+        line-height: 1.4;
     }
     .ck-content p {
         font-size: 1em;
@@ -35,7 +37,6 @@
 <script setup>
     import axios from 'axios';
     import { ref, computed } from 'vue';
-    import { onBeforeUnmount,onMounted } from "vue";
     import { 
             ClassicEditor,
             Essentials, 
@@ -50,6 +51,8 @@
             ImageResizeHandles,
             ImageToolbar,
             ImageStyle,
+            ImageCaption,
+            LinkImage,
         } from 'ckeditor5';
 
     import { Ckeditor } from '@ckeditor/ckeditor5-vue';
@@ -158,6 +161,8 @@
                 ImageResizeHandles,
                 ImageStyle,
                 ImageToolbar,
+                ImageCaption,
+                LinkImage,
             ],
             toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', '|', 'heading',"|",'insertImage',"|"],
             heading: {
@@ -176,6 +181,11 @@
                     "imageStyle:alignRight",
                     "|",
                     "resizeImage",
+                    "|",
+                    "toggleImageCaption",
+                    "imageTextAlternative",
+                    "|",
+                    "linkImage",
                 ],
                 styles: ["alignLeft", "alignCenter", "alignRight"],
             },
