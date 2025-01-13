@@ -55,20 +55,76 @@
 
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-            <ul class="space-y-2 font-medium">
-                <li>
+            <ul class="__nav-button space-y-2 font-medium">
+                <li data-routename = "listPost">
                     <RouterLink :to="'/dashboard/'" class="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <i class="text-lg text-gray-400 bi bi-database-fill-gear"></i>
                     <span class="ms-3 text-base">Dashboard</span>
                     </RouterLink>
                 </li>
-                <li>
+                <li data-routename="createPost">
                     <RouterLink :to="'/dashboard/create'" class="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <i class="text-lg text-gray-400 bi bi-plus-circle-fill"></i>
                         <span class="ms-3 text-base">Create</span>
                     </RouterLink>
                 </li>
+                <li data-routename="editPost">
+                    <a class="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="text-lg text-gray-400 bi bi-vector-pen"></i>
+                        <span class="ms-3 text-base">Edit</span>
+                    </a>
+                </li>
             </ul>
         </div>
         </aside>
 </template>
+
+<style>
+    .__nav-active a{
+        background-color:#2563eb;
+        color : white !important;
+        
+    }
+    .__nav-active a:hover{
+        color: white;
+        background-color: #2563eb;
+    }
+    .__nav-active i{
+        color:white !important;
+    }
+
+</style>
+
+<script>
+    export default{
+        data(){
+            return {
+                active_page : null,
+                navbtn_array : null,
+            }
+        },
+        mounted(){
+            this.active_page = this.$route.name
+            const btn = document.querySelectorAll(".__nav-button li")
+            this.navbtn_array = btn
+            this.navbtn_array.forEach(element => {
+                element.classList.remove('__nav-active')
+                if(element.dataset.routename == this.active_page){
+                    element.classList.add('__nav-active')
+                }
+            });
+            console.log(this.navbtn_array)
+        },
+        watch:{
+            '$route.name'(newName) {
+                this.active_page = newName
+                this.navbtn_array.forEach(element => {
+                    element.classList.remove('__nav-active')
+                    if(element.dataset.routename == this.active_page){
+                        element.classList.add('__nav-active')
+                    }
+                });
+            },
+        }
+    }
+</script>

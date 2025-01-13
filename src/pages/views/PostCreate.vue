@@ -53,6 +53,7 @@
                 </button>
             </div>
         </div>
+        <ToastManager ref="toastManager"/>
     </div>
 </template>
 
@@ -79,11 +80,15 @@
         font-size: 1em;
         margin: 0.5em 0;
     }
+    .ck-powered-by{
+        display: none !important;
+    }
 
 </style>
 <script setup>
     import axios from 'axios';
     import { ref, computed } from 'vue';
+    import ToastManager from '@/components/ToastManager.vue';
     import { 
             ClassicEditor,
             Essentials, 
@@ -129,7 +134,8 @@
     const post_tag_valid = ref(true);
 
     const uploadedImages = ref([]);
-
+    const toastManager = ref(null);
+    window.alert = function() {};   //disable default alert
     class UploadAdapter {
         constructor( loader ) {
             // The file loader instance to use during the upload.
@@ -146,13 +152,19 @@
                 axios.post(endpoints, fileData)
                     .then(response => {
                         console.log(response.data.url)
-                        this.uploadedImageUrl = response.data.url;
-                        uploadedImages.value.push(this.uploadedImageUrl);
+                        showSuccessToast('image uploaded to server')
+                        this.uploadedImageUrl = response.data.url
+                        uploadedImages.value.push(this.uploadedImageUrl)
                         resolve({
                             default: response.data.url
                         });
                     })
                     .catch(error => {
+                        if (error.response && error.response.status === 422) {
+                            showErrorToast(error.response.data.message);
+                        }else{
+                            showErrorToast('Failed to upload Image! ');
+                        }
                         reject(error);
                     })
 			}));
@@ -173,9 +185,10 @@
                         },
                     })
                     .then((response) => {
-                        console.log(response.data.message);
+                        showSuccessToast(response.data.message)
                     })
                     .catch((error) => {
+                        showErrorToast("Error deleting image")
                         console.error(
                             "Error deleting the image:",
                             error.response?.data?.message || error.message
@@ -227,13 +240,13 @@
         post_tag.value ? post_tag_valid.value = true : post_tag_valid.value = false;
 
         console.log(post_title_valid.value)
-        if(!(post_title_valid && post_rtime_valid && post_desc_valid && post_tag)){
-            return 0;
+        if(!(post_title_valid.value && post_rtime_valid.value && post_desc_valid.value && post_tag.value)){
+            return;
         }
 
         const fileData = new FormData()
         fileData.append('title', post_title.value)
-        fileData.append('desc', post_desc.value)
+        fileData.append('description', post_desc.value)
         fileData.append('rtime', post_rtime.value)
         fileData.append('tag', post_tag.value)
         fileData.append('thumbnail', post_thumbnail.value)
@@ -241,11 +254,22 @@
 
         axios.post(endpoints, fileData)
             .then(response => {
-                console.log(response)
+                showSuccessToast(response.message.data)
             })
             .catch(error =>{
-                console.log(error)
+                if (error.response && error.response.status === 422) {
+                    showErrorToast(error.response.data.message);
+                }else{
+                    showErrorToast('Failed to upload Image! ');
+                }
             })
+    }
+
+    function showSuccessToast($message){
+        toastManager.value?.addToast($message);
+    }
+    function showErrorToast($message){
+        toastManager.value?.addToast($message,'error');
     }
 
     const config = computed( () => {

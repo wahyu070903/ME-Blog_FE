@@ -87,7 +87,7 @@
                     :post_id="feed[index].id"
                     :title="feed[index].title" 
                     :description="feed[index].description" 
-                    :post_date="feed[index].post_at" 
+                    :post_date="feed[index].created_at" 
                     :rtime="feed[index].rtime" 
                     :thumbnail="feed[index].thumbnail" 
                     :tag="feed[index].tag" 
@@ -97,7 +97,7 @@
                     :post_id="feed[index].id"
                     :title="feed[index].title" 
                     :description="feed[index].description" 
-                    :post_date="feed[index].post_at" 
+                    :post_date="feed[index].created_at" 
                     :rtime="feed[index].rtime" 
                     :thumbnail="feed[index].thumbnail" 
                     :tag="feed[index].tag" />
@@ -105,7 +105,7 @@
                 <SmallFeed v-else 
                     :post_id="feed[index].id"
                     :title="feed[index].title"
-                    :post_date="feed[index].post_at" 
+                    :post_date="feed[index].created_at" 
                     :rtime="feed[index].rtime" 
                     :thumbnail="feed[index].thumbnail" 
                     :tag="feed[index].tag"/>
@@ -213,7 +213,8 @@
                 });
             },
             getImageUrl(img_name){
-                return new URL(`../../assets/images/${img_name}`, import.meta.url);
+                const endpoint = 'http://127.0.0.1:8000/storage/thumbnail/'
+                return new URL(endpoint + img_name, import.meta.url);
             }
         },
         computed :{

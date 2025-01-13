@@ -4,7 +4,7 @@
             <img :src="img_path + img_src" class="w-full aspect-[320/192] object-cover rounded-t">
             <div class="flex flex-col px-3 bg-white">
                 <p class="font-medium text-xs mt-3">{{  formattedDate }}</p>
-                <p class="font-spartan font-medium text-xl mt-2 leading-5 line-clamp-3 min-h-[60px]"> {{ post_title }} </p>
+                <p class="font-spartan font-medium text-xl mt-2 leading-5 line-clamp-3"> {{ post_title }} </p>
                 <p class="font-libre text-base mt-2 line-clamp-5"> {{post_desc}} </p>
                 <div class="flex flex-row items-end mt-2.5 mb-3">
                     <i class="text-xs bi bi-clock-history"></i>
@@ -19,7 +19,7 @@
     export default{
         data(){
             return {
-                img_path : '/src/assets/images/',
+                img_path : 'http://127.0.0.1:8000/storage/thumbnail/',
                 month_format : {
                     1 : "Jan",
                     2 : "Feb",
@@ -38,9 +38,10 @@
         },
         computed :{
             formattedDate(){
-                let [year_now, month_now, day_now] = this.post_date.split("-");
-                month_now = parseInt(month_now);
-                return `${this.month_format[month_now]} ${day_now}, ${year_now}`;
+                let [year_now, day_now, month_now] = this.post_date.split("-")
+                month_now = month_now.split('T')[0]
+                month_now = parseInt(month_now)
+                return `${this.month_format[month_now]} ${day_now}, ${year_now}`
             }
         },
         props : {

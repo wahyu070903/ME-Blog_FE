@@ -102,15 +102,17 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Pagination -->
         <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4 pb-4 px-4" aria-label="Table navigation">
             <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ (paginate_activePage) * paginate_perPage - paginate_perPage + 1 }} - {{ (paginate_activePage) * paginate_perPage }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ paginate_totalItems }}</span></span>
             <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
                 <li>
                     <button v-on:click="paginatePrev" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</button>
                 </li>
-                <button v-for="(element, index) in paginate_totalPaginateButton">
-                    <li class="__paginate-btn" :class="{'__paginate-active' : index === 0}">
-                        <a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ index + 1 }}</a>
+                <button v-for="(element, index) in generatePaginateArray" v-on:click="paginateTo(element)">
+                    <li class="__paginate-btn" :class="{'__paginate-active' : element === paginate_activePage}">
+                        <a class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ element }}</a>
                     </li>
                 </button>
                 <li>
@@ -118,6 +120,7 @@
                 </li>
             </ul>
         </nav>
+        <!-- Modal -->
         <div id="delete-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-1/2 right-1/2 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <input type="hidden" id="delete-modal-id">
             <div class="flex w-full h-full items-center justify-center">
@@ -270,6 +273,11 @@
                     this.paginate_activePage--
                 }
             },
+            paginateTo(target){
+                this.paginate_activePage = target
+                const start = (this.paginate_activePage - 1) * this.paginate_perPage
+                this.fetchData(start + 1)
+            },
             toggleFilter(){
                 console.log("click")
             },
@@ -328,16 +336,33 @@
             paginate_totalItems(newValue){
                 this.paginate_totalPaginateButton = Math.ceil(newValue / this.paginate_perPage)
             },
-            paginate_activePage(newValue){
-                const button_element = document.querySelectorAll(".__paginate-btn");
-                button_element.forEach((element, index) => {
-                    const button_num = element.children[0].innerHTML
-                    element.classList.remove("__paginate-active")
-                    if(button_num == this.paginate_activePage){
-                        element.classList.add("__paginate-active")
-                    }
-                })
-            },
         },
+        computed: {
+            generatePaginateArray(){
+                const offset = Math.floor(this.max_visible_paginate / 2)
+                const total_button = Math.ceil(this.paginate_totalItems / this.paginate_perPage)
+                const l_offset = offset
+                const r_offset = total_button - offset
+
+                let newArray = [];
+                if(this.paginate_activePage < l_offset + 1){
+                    for(let i = 1 ; i <= this.max_visible_paginate; i++){
+                        newArray.push(i)
+                    }
+                }
+                else if(this.paginate_activePage > r_offset){
+                    for(let i = total_button ; i > total_button-this.max_visible_paginate; i--){
+                        newArray.push(i)
+                    }
+                    newArray.reverse()
+                }
+                else{
+                    for(let i = this.paginate_activePage - offset; i <= this.paginate_activePage + offset ; i++){
+                        newArray.push(i);
+                    }
+                }
+                return newArray
+            }
+        }
     }
 </script>
