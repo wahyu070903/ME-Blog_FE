@@ -160,7 +160,7 @@
             </div>
         </div>
         <!-- Mobile size modal -->
-        <div class="w-screen flex flex-wrap items-center justify-between py-4 px-6 bg-base-navy md:hidden">
+        <div class="relative w-screen flex flex-wrap items-center justify-between py-4 px-6 z-50 bg-base-navy md:hidden">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img class="h-9 w-auto" src="../assets/app_icons/logoipsum.svg" draggable="false">
             </a>
@@ -200,47 +200,75 @@
                     </svg>
                 </button>
             </div>
-            <div class="hidden w-full py-4" id="navbar-hamburger">
-                <form class="max-w-md mx-auto">   
-                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </div>
-                        <input type="search" autocomplete="off" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Post, Article..." required />
-                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+        </div>
+        <div class="__navbar_burger relative hidden w-full py-4 px-6 bg-base-navy z-40" id="navbar-hamburger">
+            <form class="max-w-md mx-auto">   
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
                     </div>
-                </form>
-
-                <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded-t dark:bg-blue-600" aria-current="page">Feature</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Feature</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Toolbox</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 rounded-b hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Category</a>
-                    </li>
-                </ul>
-                <div class="flex flex-row items-center justify-end mt-4">
-                    <button type="button" class="text-white bg-base-yellow hover:bg-base-yellow/90 focus:ring-4 focus:outline-none focus:ring-base-yellow/50 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:base-yellow/55 me-2 mb-2">
-                        Sign in
-                    </button>
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-700/90 focus:ring-4 focus:outline-none focus:ring-blue-700/50 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-700/55 me-2 mb-2">
-                        Sign up
-                    </button>
+                    <input type="search" autocomplete="off" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Post, Article..." required />
+                    <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                 </div>
+            </form>
+
+            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <li>
+                    <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded-t dark:bg-blue-600" aria-current="page">Feature</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Feature</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Toolbox</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-gray-900 rounded-b hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Category</a>
+                </li>
+            </ul>
+            <div class="flex flex-row items-center justify-end mt-4">
+                <button type="button" class="text-white bg-base-yellow hover:bg-base-yellow/90 focus:ring-4 focus:outline-none focus:ring-base-yellow/50 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:base-yellow/55 me-2 mb-2">
+                    Sign in
+                </button>
+                <button type="button" class="text-white bg-blue-700 hover:bg-blue-700/90 focus:ring-4 focus:outline-none focus:ring-blue-700/50 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-blue-700/55 me-2 mb-2">
+                    Sign up
+                </button>
             </div>
         </div>
     </nav>
-
 </template>
+
+<style>
+    .__navbar_burger{
+        animation: scrollIn 0.5s ease-in-out forwards;
+    }
+    .__navbar_burger.hidden{
+        animation: scrollOut 0.5s ease-in-out forwards;
+        display: block !important;
+    }
+
+    @keyframes scrollIn {
+        from {
+            transform: translateY(-100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes scrollOut{
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-100%);
+        }
+    }
+
+</style>
 
 <script>
     import { initFlowbite} from 'flowbite'

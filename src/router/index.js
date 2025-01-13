@@ -35,14 +35,19 @@ const router = createRouter({
             children: [
                 {
                     path: "",
-                    name: 'postList',
+                    name: 'listPost',
                     component: PostList
                 },
                 {
                     path: "create",
-                    name: "postcreate",
+                    name: "createPost",
                     component: PostCreate
-                }
+                },
+                {
+                    path: "edit",
+                    name: "editPost",
+                    component: PostCreate
+                },
             ]
         }
 

@@ -91,7 +91,7 @@ import { RouterLink } from 'vue-router';
     export default{
         data(){
             return {
-                img_path : '/src/assets/images/',
+                img_path : 'http://127.0.0.1:8000/storage/thumbnail/',
                 month_format : {
                     1 : "Jan",
                     2 : "Feb",
@@ -119,9 +119,10 @@ import { RouterLink } from 'vue-router';
         },
         computed: {
             formattedDate(){
-                let [year_now, month_now, day_now] = this.post_date.split("-");
-                month_now = parseInt(month_now);
-                return `${this.month_format[month_now]} ${day_now}, ${year_now}`;
+                let [year_now, day_now, month_now] = this.post_date.split("-")
+                month_now = month_now.split('T')[0]
+                month_now = parseInt(month_now)
+                return `${this.month_format[month_now]} ${day_now}, ${year_now}`
             }
         }
     }

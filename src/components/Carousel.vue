@@ -6,7 +6,7 @@
         <div class="w-full">
             <Splide :options="options" aria-label="My Favorite Images" ref="splide">
                 <SplideSlide v-for="data in carousel_data" class="my-1">
-                    <Card :post_id =data.id :img_src = data.thumbnail :post_date = data.post_at :post_title = data.title :post_desc = data.description :read_time = data.rtime />
+                    <Card :post_id =data.id :img_src = data.thumbnail :post_date = data.created_at :post_title = data.title :post_desc = data.description :read_time = data.rtime />
                 </SplideSlide>
                 <!-- Hidden element to center last card !Important -->
                 <SplideSlide>

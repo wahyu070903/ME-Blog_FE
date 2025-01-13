@@ -1,18 +1,16 @@
 <template>
-    <div class="mx-11">
-        <p class="mt-5 mb-1.5 font-spartan font-bold text-base leading-4">NASA Set Coverage for ULA , Astrobotic Artemis Robotic Moon Launch</p>
+    <div v-if="fetch_success" class="mx-11">
+        <p class="mt-5 mb-1.5 font-spartan font-bold text-base leading-4">{{ title }}</p>
         <div class="flex flex-row items-center mb-5">
-            <p class="text-xs">Aug 24, 2024</p>
-            <p class="text-xs px-1 py-0.5 border mx-2.5 rounded-sm border-[#BABABA]">Technology</p>
+            <p class="text-xs">{{ formattedDate }}</p>
+            <p class="text-xs px-1 py-0.5 border mx-2.5 rounded-sm border-[#BABABA]">{{ tag }}</p>
         </div>
         <!-- Thumbnail -->
         <div class="max-w-full h-auto ratio-[1/4] rounded">
-            <img src="../../assets/images/astrobotic-photo.webp" class="w-full h-full object-cover rounded">
+            <img :src="thumbnail_path + thumbnail" class="w-full h-full object-cover rounded">
         </div>
-        <div id="__content" class="text-sm font-libre mt-6 mb-2">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse iaculis libero diam. Pellentesque condimentum erat ac orci posuere porta. Donec imperdiet sem ac felis mollis ultricies nec vel mi. Cras tempus sodales ante at vehicula. Nulla iaculis ligula mauris, vel dictum felis congue ut. Aenean metus sem, aliquet eu nibh non, condimentum vehicula ex. Integer eget iaculis metus. Vestibulum pharetra sapien non diam congue convallis. Aenean vel congue purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla at eros non dignissim. Sed consequat laoreet sollicitudin. Nunc ultrices eget diam vel commodo. Praesent hendrerit justo ut viverra lobortis. Curabitur urna lectus, ultricies eget facilisis vel, molestie eget neque. Phasellus posuere lectus mauris, vel faucibus tellus ultricies consectetur.
-            </p>
+        <div id="__content" v-html="content" class="text-sm font-libre mt-6 mb-2">
+
         </div>
         <div class="flex flex-row items-center justify-between border-b py-2.5 mb-3">
             <div class="flex flex-row items-center space-x-5">
@@ -95,12 +93,102 @@
         <Comments />
     </div>
 </template>
+ 
+<style>
+    #__content h1 {
+        font-size: 2em;
+        font-weight: bold;
+        margin: 1em 0;
+    }
+
+    #__content h2 {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin: 1em 0;
+    }
+    #__content h3 {
+        font-size: 1.25em; 
+        font-weight: bold; 
+        color: #333; 
+        margin: 0.75em 0; 
+        line-height: 1.4;
+    }
+    #__content p {
+        font-size: 1em;
+        margin: 0.5em 0;
+    }
+</style>
 
 <script>
     import Comments from '@/components/Comment.vue'
+    import axios from 'axios';
+    import 'ckeditor5/ckeditor5.css';
+    
     export default {
+        data(){
+            return {
+                fetch_success: null,
+                content_id: null,
+                title: '',
+                description: '',
+                rtime: 0,
+                tag: '',
+                content: '',
+                thumbnail: '',
+                post_date: '',
+                month_format : {
+                        1 : "Jan",
+                        2 : "Feb",
+                        3 : "Mar",
+                        4 : "Apr",
+                        5 : "May",
+                        6 : "Jun",
+                        7 : "Jul",
+                        8 : "Aug",
+                        9 : "Sep",
+                        10 : "Okt",
+                        11 : "Nov",
+                        12 : "Des",
+                },
+                thumbnail_path : "http://127.0.0.1:8000/storage/thumbnail/",
+            }
+        },
         components: {
             Comments,
+        },
+        mounted(){
+            this.content_id = this.$route.params.id
+            this.fetchPost()
+        },
+        methods: {
+            fetchPost(){
+                const endpoint = 'http://127.0.0.1:8000/api/getbyid/'
+                axios.get(endpoint + this.content_id)
+                    .then(response =>{
+                        response = response.data.data[0]
+                        this.title = response.title
+                        this.description = response.description
+                        this.post_date = response.created_at
+                        this.rtime = response.rtime
+                        this.tag = response.tag
+                        this.content = response.content
+                        this.thumbnail = response.thumbnail
+
+                        this.fetch_success = true
+                    })
+                    .catch(error =>{
+                        console.log(error)
+                        this.fetch_success = false
+                    })
+            }
+        },
+        computed: {
+            formattedDate(){
+                let [year_now, day_now, month_now] = this.post_date.split("-")
+                month_now = month_now.split('T')[0]
+                month_now = parseInt(month_now)
+                return `${this.month_format[month_now]} ${day_now}, ${year_now}`
+            }
         }
     }
 </script>
