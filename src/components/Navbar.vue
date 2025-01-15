@@ -245,11 +245,6 @@
     .__navbar_burger{
         animation: scrollIn 0.5s ease-in-out forwards;
     }
-    .__navbar_burger.hidden{
-        animation: scrollOut 0.5s ease-in-out forwards;
-        display: block !important;
-    }
-
     @keyframes scrollIn {
         from {
             transform: translateY(-100%);
@@ -259,14 +254,6 @@
         }
     }
 
-    @keyframes scrollOut{
-        from {
-            transform: translateY(0);
-        }
-        to {
-            transform: translateY(-100%);
-        }
-    }
 
 </style>
 

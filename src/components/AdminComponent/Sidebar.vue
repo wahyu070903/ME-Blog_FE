@@ -70,8 +70,15 @@
                 </li>
                 <li data-routename="editPost">
                     <a class="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="text-lg text-gray-400 bi bi-vector-pen"></i>
-                        <span class="ms-3 text-base">Edit</span>
+                        <div class="flex flex-row items-center justify-between w-full">
+                            <div>
+                                <i class="text-lg text-gray-400 bi bi-vector-pen"></i>
+                                <span class="ms-3 text-base">Edit</span>
+                            </div>
+                            <div v-if="active_page == 'editPost'" class="px-4 py-1 rounded-md bg-white">
+                                <span class="text-blue-500">{{ $route.params.id }}</span>
+                            </div>
+                        </div>
                     </a>
                 </li>
             </ul>

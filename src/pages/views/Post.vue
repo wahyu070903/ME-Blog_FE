@@ -1,16 +1,17 @@
 <template>
-    <div v-if="fetch_success" class="mx-11">
+    <div v-if="post_fetch_status" class="mx-11">
         <p class="mt-5 mb-1.5 font-spartan font-bold text-base leading-4">{{ title }}</p>
         <div class="flex flex-row items-center mb-5">
             <p class="text-xs">{{ formattedDate }}</p>
             <p class="text-xs px-1 py-0.5 border mx-2.5 rounded-sm border-[#BABABA]">{{ tag }}</p>
         </div>
         <!-- Thumbnail -->
-        <div class="max-w-full h-auto ratio-[1/4] rounded">
+        <div class="max-w-full h-56 ratio-[1/4] rounded">
             <img :src="thumbnail_path + thumbnail" class="w-full h-full object-cover rounded">
         </div>
-        <div id="__content" v-html="content" class="text-sm font-libre mt-6 mb-2">
-
+        <!-- Keep ck-content class there -->
+        <div id="__content" v-html="content" class="ck-content text-sm font-libre mt-6 mb-2">
+        
         </div>
         <div class="flex flex-row items-center justify-between border-b py-2.5 mb-3">
             <div class="flex flex-row items-center space-x-5">
@@ -41,19 +42,20 @@
                 </a>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-between mb-10">
-            <button class="flex flex-row items-center space-x-1.5">
+        <!-- prev and next button -->
+        <div v-if="nextprev_fetch_status" class="flex flex-row items-center justify-between mb-10">
+            <RouterLink :to="'/post/' + prevPost.id" v-if="prevPost" class="flex flex-row items-center space-x-1.5">
                 <i class="bi bi-arrow-left text-sm"></i>
                 <div class="max-w-40">
-                    <p class="text-xs line-clamp-2 w-full font-bold text-left">Profit and Loss Modeling on GPUs with ISO C++ Language Parallelism</p>
+                    <p class="text-xs line-clamp-2 w-full font-bold text-left">{{ prevPost.title }}</p>
                 </div>
-            </button>
-            <button class="flex flex-row items-center space-x-1.5">
+            </RouterLink>
+            <RouterLink :to="'/post/' + nextPost.id" v-if="nextPost" class="flex flex-row items-center space-x-1.5">
                 <div class="max-w-40">
-                    <p class="text-xs line-clamp-2 w-full font-bold text-right">Profit and Loss Modeling on GPUs with ISO C++ Language Parallelism</p>
+                    <p class="text-xs line-clamp-2 w-full font-bold text-right">{{ nextPost.title }}</p>
                 </div>
                 <i class="bi bi-arrow-right text-sm"></i>
-            </button>
+            </RouterLink>
         </div>
         <form>
             <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
@@ -93,41 +95,17 @@
         <Comments />
     </div>
 </template>
- 
-<style>
-    #__content h1 {
-        font-size: 2em;
-        font-weight: bold;
-        margin: 1em 0;
-    }
-
-    #__content h2 {
-        font-size: 1.5em;
-        font-weight: bold;
-        margin: 1em 0;
-    }
-    #__content h3 {
-        font-size: 1.25em; 
-        font-weight: bold; 
-        color: #333; 
-        margin: 0.75em 0; 
-        line-height: 1.4;
-    }
-    #__content p {
-        font-size: 1em;
-        margin: 0.5em 0;
-    }
-</style>
 
 <script>
     import Comments from '@/components/Comment.vue'
     import axios from 'axios';
-    import 'ckeditor5/ckeditor5.css';
+    import 'ckeditor5/ckeditor5-content.css';
     
     export default {
         data(){
             return {
-                fetch_success: null,
+                post_fetch_status: null,
+                nextprev_fetch_status: null,
                 content_id: null,
                 title: '',
                 description: '',
@@ -151,14 +129,27 @@
                         12 : "Des",
                 },
                 thumbnail_path : "http://127.0.0.1:8000/storage/thumbnail/",
+                prevPost: null,
+                nextPost: null,
             }
         },
         components: {
             Comments,
         },
-        mounted(){
-            this.content_id = this.$route.params.id
-            this.fetchPost()
+        watch: {
+        '$route.params.id': {
+            immediate: true,
+                handler(newId) {
+                    this.content_id = newId;
+                    this.fetchPost();
+                    this.fetchNextPrev();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth', // Smooth scrolling effect
+                    });
+                },
+            },
         },
         methods: {
             fetchPost(){
@@ -174,18 +165,33 @@
                         this.content = response.content
                         this.thumbnail = response.thumbnail
 
-                        this.fetch_success = true
+                        this.post_fetch_status = true
                     })
                     .catch(error =>{
                         console.log(error)
-                        this.fetch_success = false
+                        this.post_fetch_status = false
                     })
-            }
+            },
+            fetchNextPrev(){
+                const endpoint = "http://127.0.0.1:8000/api/getnextprev/"
+                axios.get(endpoint + this.content_id)
+                    .then(response => {
+                        response = response.data.data
+                        this.prevPost = response.prev
+                        this.nextPost = response.next
+
+                        this.nextprev_fetch_status = true
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.nextprev_fetch_status = false
+                    })
+            },
         },
         computed: {
             formattedDate(){
-                let [year_now, day_now, month_now] = this.post_date.split("-")
-                month_now = month_now.split('T')[0]
+                let [year_now, month_now, day_now] = this.post_date.split("-")
+                day_now = month_now.split('T')[0]
                 month_now = parseInt(month_now)
                 return `${this.month_format[month_now]} ${day_now}, ${year_now}`
             }
