@@ -91,9 +91,9 @@
                             <button v-on:click="showDeleteModal(list.id)" class="px-1.5 py-1 bg-red-200 rounded-sm">
                                 <i class="bi bi-trash3"></i>
                             </button>
-                            <a class="px-1.5 py-1 bg-blue-200 rounded-sm" href="#">
+                            <RouterLink :to="'edit/' + list.id" class="px-1.5 py-1 bg-blue-200 rounded-sm" href="#">
                                 <i class="bi bi-pencil-square"></i>
-                            </a>
+                            </RouterLink>
                             <button v-on:click="showDetailModal(list.id)" class="px-1.5 py-1 bg-green-200 rounded-sm" href="#">
                                 <i class="bi bi-eye"></i>
                             </button>
@@ -209,6 +209,7 @@
 
 <script>
     import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
     export default{
         data(){

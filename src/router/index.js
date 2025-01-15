@@ -7,6 +7,7 @@ import Homepage from '../pages/views/Homepage.vue'
 import Post from '../pages/views/Post.vue'
 import PostList from '@/pages/views/PostList.vue'
 import PostCreate from '@/pages/views/PostCreate.vue'
+import PostEdit from '@/pages/views/PostEdit.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,9 +45,9 @@ const router = createRouter({
                     component: PostCreate
                 },
                 {
-                    path: "edit",
+                    path: "edit/:id",
                     name: "editPost",
-                    component: PostCreate
+                    component: PostEdit
                 },
             ]
         }
