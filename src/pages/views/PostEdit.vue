@@ -1,18 +1,31 @@
 <template>
-    <div v-if="fetch_data_status">
-        <PostEditor 
-            :content="fetch_data.content"
+    <div>
+        <div v-if="fetch_data_status">
+            <PostEditor 
+                :content="fetch_data.content"
+                @trigger-success-toast="showSuccessToast"
+                @trigger-error-toast="showErrorToast"     
+            />
+        </div>
+        <PostParam v-if="fetch_data_status"
+            :param_title="fetch_data.title"
+            :param_desc="fetch_data.description"
+            :param_rtime="fetch_data.rtime"
+            :param_tag="fetch_data.tag"
+            :param_thumbnail="fetch_data.thumbnail"
+            :param_content="fetch_data.content"
             @trigger-success-toast="showSuccessToast"
-            @trigger-error-toast="showErrorToast"     
+            @trigger-error-toast="showErrorToast"
         />
+        <ToastManager ref="toastManagerRef" />
     </div>
-    <ToastManager ref="toastManagerRef" />
 </template>
 
 <script>
     import axios from 'axios';
     import PostEditor from '../../components/PostEditor.vue'
     import ToastManager from '@/components/ToastManager.vue';
+    import PostParam from '@/components/PostParam.vue';
 
     export default{
         data(){
@@ -25,6 +38,7 @@
         components: {
             PostEditor,
             ToastManager,
+            PostParam,
         },
         mounted(){
             this.content_id = this.$route.params.id
