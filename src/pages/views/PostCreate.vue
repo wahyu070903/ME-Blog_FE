@@ -239,7 +239,6 @@
         post_desc.value ? post_desc_valid.value = true : post_desc_valid.value = false;
         post_tag.value ? post_tag_valid.value = true : post_tag_valid.value = false;
 
-        console.log(post_title_valid.value)
         if(!(post_title_valid.value && post_rtime_valid.value && post_desc_valid.value && post_tag.value)){
             return;
         }

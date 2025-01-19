@@ -12,10 +12,8 @@
             :param_desc="fetch_data.description"
             :param_rtime="fetch_data.rtime"
             :param_tag="fetch_data.tag"
-            :param_thumbnail="fetch_data.thumbnail"
             :param_content="fetch_data.content"
-            @trigger-success-toast="showSuccessToast"
-            @trigger-error-toast="showErrorToast"
+            @edit-action="editPost"
         />
         <ToastManager ref="toastManagerRef" />
     </div>
@@ -63,7 +61,20 @@
             },
             showErrorToast(message){
                 this.$refs.toastManagerRef.addToast(message,'error')
-            }   
-        }
+            },
+            editPost(data){
+                const endpoint = 'http://127.0.0.1:8000/api/editpost/'
+                axios.post(endpoint + this.content_id, data)
+                    .then(response =>{
+                        const message = response.data.message
+                        this.showSuccessToast(message)
+                    })
+                    .catch(error =>{
+                        const message = error.response.data.message
+                        console.log(message)
+                        this.showErrorToast(message)
+                    })
+            },
+        },
     }
 </script>

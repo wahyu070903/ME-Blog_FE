@@ -29,7 +29,7 @@
                         <p v-if="!post_tag_valid" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Value is required</p>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="post_thumbnail">Upload file</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="post_thumbnail">Upload file (optional)</label>
                         <input @change="handleThumbnailChange" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="post_thumbnail" type="file">
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <i class="bi bi-send-fill text-base mr-2"></i>
                 <span class="text-sm">Publish</span>
             </button>
-            <button v-if="editor_mode == 'EDIT'" v-on:click="editPost" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-sm text-sm px-2.5 py-1.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            <button v-if="editor_mode == 'EDIT'" v-on:click="emitEditAction" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-sm text-sm px-2.5 py-1.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                 <i class="bi bi-send-fill text-base mr-2"></i>
                 <span class="text-sm">Publish</span>
             </button>
@@ -53,8 +53,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     export default{
         data(){
             return{
@@ -77,7 +75,6 @@
             param_desc: String,
             param_tag: String,
             param_rtime: Number,
-            param_thumbnail: String,
             param_content: String,
         },
         mounted(){
@@ -90,33 +87,37 @@
                 this.param_desc && (this.post_desc = this.param_desc)
                 this.param_tag && (this.post_tag = this.param_tag)
                 this.param_rtime && (this.post_rtime = this.param_rtime)
-                this.param_thumbnail && (this.post_thumbnail = this.param_thumbnail)
             }
             else if(route_name == 'createPost'){
                 this.editor_mode = 'CREATE'
             }
         },
         methods: {
-            editPost(){
-                const endpoint = 'http://127.0.0.1:8000/api/edit/'
-                const updated_data = {
-                    "title"         : this.post_title,
-                    "description"   : this.post_desc,
-                    "tag"           : this.post_tag,
-                    "rtime"         : this.post_rtime,
-                    "thumbnail"     : this.post_thumbnail,
-                    "content"       : this.param_content
+            emitEditAction(){
+                this.post_title ? this.post_title_valid = true : this.post_title_valid = false;
+                this.post_rtime ? this.post_rtime_valid = true : this.post_rtime_valid = false;
+                this.post_desc ? this.post_desc_valid = true : this.post_desc_valid = false;
+                this.post_tag ? this.post_tag_valid = true : this.post_tag_valid = false;
+                
+                if(!(this.post_title_valid && this.post_rtime_valid && this.post_desc_valid && this.post_tag)){
+                    return;
                 }
-                axios.put(endpoint + this.post_id, updated_data)
-                    .then(response =>{
-                        const message = response.data.message
-                        this.$emit('trigger-success-toast', message)
-                    })
-                    .catch(error =>{
-                        const message = error.response.data.message
-                        this.$emit('trigger-error-toast', message)
-                    })
+
+                const updated_data = new FormData()
+
+                updated_data.append("title", this.post_title)
+                updated_data.append("description", this.post_desc)
+                updated_data.append("tag", this.post_tag)
+                updated_data.append("rtime", this.post_rtime)
+                updated_data.append("thumbnail", this.post_thumbnail)
+                updated_data.append("content", this.param_content)
+
+                this.$emit("edit-action", updated_data)
+
             },
+            handleThumbnailChange(event){
+                this.post_thumbnail = event.target.files[0];
+            }
         }
     }
 </script>
