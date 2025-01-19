@@ -91,7 +91,7 @@
                             <button v-on:click="showDeleteModal(list.id)" class="px-1.5 py-1 bg-red-200 rounded-sm">
                                 <i class="bi bi-trash3"></i>
                             </button>
-                            <RouterLink :to="'edit/' + list.id" class="px-1.5 py-1 bg-blue-200 rounded-sm" href="#">
+                            <RouterLink :to="'edit/' + list.id" class="px-1.5 py-1 bg-blue-200 rounded-sm">
                                 <i class="bi bi-pencil-square"></i>
                             </RouterLink>
                             <button v-on:click="showDetailModal(list.id)" class="px-1.5 py-1 bg-green-200 rounded-sm" href="#">

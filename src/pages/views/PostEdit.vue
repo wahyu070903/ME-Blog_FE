@@ -1,18 +1,29 @@
 <template>
-    <div v-if="fetch_data_status">
-        <PostEditor 
-            :content="fetch_data.content"
-            @trigger-success-toast="showSuccessToast"
-            @trigger-error-toast="showErrorToast"     
+    <div>
+        <div v-if="fetch_data_status">
+            <PostEditor 
+                :content="fetch_data.content"
+                @trigger-success-toast="showSuccessToast"
+                @trigger-error-toast="showErrorToast"     
+            />
+        </div>
+        <PostParam v-if="fetch_data_status"
+            :param_title="fetch_data.title"
+            :param_desc="fetch_data.description"
+            :param_rtime="fetch_data.rtime"
+            :param_tag="fetch_data.tag"
+            :param_content="fetch_data.content"
+            @edit-action="editPost"
         />
+        <ToastManager ref="toastManagerRef" />
     </div>
-    <ToastManager ref="toastManagerRef" />
 </template>
 
 <script>
     import axios from 'axios';
     import PostEditor from '../../components/PostEditor.vue'
     import ToastManager from '@/components/ToastManager.vue';
+    import PostParam from '@/components/PostParam.vue';
 
     export default{
         data(){
@@ -25,6 +36,7 @@
         components: {
             PostEditor,
             ToastManager,
+            PostParam,
         },
         mounted(){
             this.content_id = this.$route.params.id
@@ -49,7 +61,20 @@
             },
             showErrorToast(message){
                 this.$refs.toastManagerRef.addToast(message,'error')
-            }   
-        }
+            },
+            editPost(data){
+                const endpoint = 'http://127.0.0.1:8000/api/editpost/'
+                axios.post(endpoint + this.content_id, data)
+                    .then(response =>{
+                        const message = response.data.message
+                        this.showSuccessToast(message)
+                    })
+                    .catch(error =>{
+                        const message = error.response.data.message
+                        console.log(message)
+                        this.showErrorToast(message)
+                    })
+            },
+        },
     }
 </script>
