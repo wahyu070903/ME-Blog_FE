@@ -13,7 +13,7 @@
                                 {{ tag }}
                             </p>
                         </div>
-                        <img :src="img_path + thumbnail" class="w-full h-full aspect-[35/20]">
+                        <img :src="img_path + thumbnail" class="w-full h-full aspect-[35/20] object-cover">
                         <div :v-if="tag == 'TECHNOLOGY'">
                             <div class="absolute top-10 left-0 -translate-x-full w-fit px-0.5 py-2.5 rounded-tl-sm rounded-bl-sm bg-base-yellow">
                                 <p class="__taglabel font-medium text-xs text-white leading-1">TECH</p>

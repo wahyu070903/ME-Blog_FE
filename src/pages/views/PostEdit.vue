@@ -4,7 +4,8 @@
             <PostEditor 
                 :content="fetch_data.content"
                 @trigger-success-toast="showSuccessToast"
-                @trigger-error-toast="showErrorToast"     
+                @trigger-error-toast="showErrorToast"
+                @update:editor="updateEditorData"
             />
         </div>
         <PostParam v-if="fetch_data_status"
@@ -31,6 +32,7 @@
                 content_id: null,
                 fetch_data: null,
                 fetch_data_status: null,
+                editor_data: "",
             }
         },
         components: {
@@ -43,6 +45,9 @@
             this.fetchContent()
         },
         methods:{
+            updateEditorData(newContent){
+                this.editor_data = newContent
+            },  
             fetchContent(){
                 const endpoint = "http://127.0.0.1:8000/api/getbyid/"
                 axios.get(endpoint + this.content_id)
@@ -64,6 +69,7 @@
             },
             editPost(data){
                 const endpoint = 'http://127.0.0.1:8000/api/editpost/'
+                data.append("content", this.editor_data )
                 axios.post(endpoint + this.content_id, data)
                     .then(response =>{
                         const message = response.data.message

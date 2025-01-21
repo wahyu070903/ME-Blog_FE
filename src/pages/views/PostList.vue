@@ -240,7 +240,6 @@ import { RouterLink } from 'vue-router';
                     const resp_data = response.data.data
                     this.lists = resp_data
                     this.list_success = true
-                    console.log(this.lists)
                 }
                 catch(error){
                     this.list_error = true
@@ -254,7 +253,6 @@ import { RouterLink } from 'vue-router';
                     const response = await axios.get(endpoint)
                     const resp_data = response.data.data
                     this.paginate_totalItems = resp_data
-                    console.log(this.paginate_totalItems)
                 }
                 catch(error){
                     console.log(error)

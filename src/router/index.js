@@ -8,6 +8,8 @@ import Post from '../pages/views/Post.vue'
 import PostList from '@/pages/views/PostList.vue'
 import PostCreate from '@/pages/views/PostCreate.vue'
 import PostEdit from '@/pages/views/PostEdit.vue'
+import Authentication from '@/pages/views/Autentication.vue'
+import EmailVerivication from'@/components/EmailConfirmation.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,7 +52,17 @@ const router = createRouter({
                     component: PostEdit
                 },
             ]
-        }
+        },
+        {
+            path: "/signup",
+            name: "signup",
+            component: Authentication
+        },
+        {
+            path: "/verivication",
+            name: "verivication",
+            component: EmailVerivication
+        },
 
     ] 
 })

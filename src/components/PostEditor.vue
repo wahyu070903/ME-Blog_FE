@@ -5,6 +5,7 @@
             v-model="editor_data"
             :editor="ClassicEditor"
             :config="config"
+            @input="updateParentData"
         />
     </div>
 </template>
@@ -61,7 +62,8 @@
 
     const emit = defineEmits([
         'trigger-success-toast',
-        'trigger-error-toast'
+        'trigger-error-toast',
+        'update:editor',
     ])
     
     class UploadAdapter {
@@ -126,6 +128,9 @@
         }
     }
 
+    function updateParentData(){
+        emit("update:editor", editor_data)
+    }
     function UploadAdapterPlugin( editor ) {
         editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
             const adapter = new UploadAdapter(loader);
