@@ -29,8 +29,10 @@
                         <p v-if="!post_tag_valid" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Value is required</p>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="post_thumbnail">Upload file (optional)</label>
+                        <label v-if="editor_mode == 'EDIT'" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="post_thumbnail">Upload file (optional)</label>
+                        <label v-if="editor_mode == 'CREATE'" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="post_thumbnail">Upload file</label>
                         <input @change="handleThumbnailChange" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="post_thumbnail" type="file">
+                        <p v-if="!post_thumbnail_valid" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Thumbnail is required</p>
                     </div>
                 </div>
             </form>
@@ -40,7 +42,7 @@
                 <i class="bi bi-floppy-fill text-base mr-2"></i>
                 <span class="text-sm">Draft</span>
             </button>
-            <button v-if="editor_mode == 'CREATE'" v-on:click="publishPost" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounden-sm text-sm px-2.5 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <button v-if="editor_mode == 'CREATE'" v-on:click="emitPublishAction" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounden-sm text-sm px-2.5 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 <i class="bi bi-send-fill text-base mr-2"></i>
                 <span class="text-sm">Publish</span>
             </button>
@@ -66,6 +68,7 @@
                 post_rtime_valid: true,
                 post_desc_valid: true,
                 post_tag_valid: true,
+                post_thumbnail_valid: true,
                 editor_mode: null,
             }
         },
@@ -93,14 +96,22 @@
             }
         },
         methods: {
+            validateInput(){
+                this.post_title ? this.post_title_valid = true : this.post_title_valid = false
+                this.post_rtime ? this.post_rtime_valid = true : this.post_rtime_valid = false
+                this.post_desc ? this.post_desc_valid = true : this.post_desc_valid = false
+                this.post_tag ? this.post_tag_valid = true : this.post_tag_valid = false
+                if(this.editor_mode == "CREATE"){
+                    this.post_thumbnail ? this.post_thumbnail_valid = true : this.post_thumbnail_valid = false
+                }
+                if((this.post_title_valid && this.post_rtime_valid && this.post_desc_valid && this.post_tag_valid && this.post_thumbnail_valid)){
+                    return 1
+                }
+                return 0
+            },
             emitEditAction(){
-                this.post_title ? this.post_title_valid = true : this.post_title_valid = false;
-                this.post_rtime ? this.post_rtime_valid = true : this.post_rtime_valid = false;
-                this.post_desc ? this.post_desc_valid = true : this.post_desc_valid = false;
-                this.post_tag ? this.post_tag_valid = true : this.post_tag_valid = false;
-                
-                if(!(this.post_title_valid && this.post_rtime_valid && this.post_desc_valid && this.post_tag)){
-                    return;
+                if(!this.validateInput()){
+                    return
                 }
 
                 const updated_data = new FormData()
@@ -110,9 +121,23 @@
                 updated_data.append("tag", this.post_tag)
                 updated_data.append("rtime", this.post_rtime)
                 updated_data.append("thumbnail", this.post_thumbnail)
-                updated_data.append("content", this.param_content)
 
                 this.$emit("edit-action", updated_data)
+
+            },
+            emitPublishAction(){
+                if(!this.validateInput()){
+                    return
+                }
+
+                const fileData = new FormData()
+                fileData.append('title', this.post_title)
+                fileData.append('description', this.post_desc)
+                fileData.append('rtime', this.post_rtime)
+                fileData.append('tag', this.post_tag)
+                fileData.append('thumbnail', this.post_thumbnail)
+
+                this.$emit("publish-action", fileData)
 
             },
             handleThumbnailChange(event){
