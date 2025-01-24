@@ -8,8 +8,11 @@ import Post from '../pages/views/Post.vue'
 import PostList from '@/pages/views/PostList.vue'
 import PostCreate from '@/pages/views/PostCreate.vue'
 import PostEdit from '@/pages/views/PostEdit.vue'
-import Authentication from '@/pages/views/Autentication.vue'
+import UserRegister from '@/pages/views/UserRegister.vue'
+import UserLogin from '@/pages/views/UserLogin.vue'
 import EmailVerivication from'@/components/EmailConfirmation.vue'
+
+let registration_sent = false
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,14 +57,26 @@ const router = createRouter({
             ]
         },
         {
-            path: "/signup",
-            name: "signup",
-            component: Authentication
+            path: "/register",
+            name: "register",
+            component: UserRegister
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: UserLogin
         },
         {
             path: "/verivication",
             name: "verivication",
-            component: EmailVerivication
+            component: EmailVerivication,
+            beforeEnter: (to, from, next) => {
+                if(registration_sent){
+                    next();
+                }else{
+                    next('/signup')
+                }
+            }
         },
 
     ] 
