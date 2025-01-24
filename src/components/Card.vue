@@ -1,8 +1,8 @@
 <template>
     <RouterLink :to="'/post/'+ post_id">
-        <div class="flex flex-col max-w-80 rounded drop-shadow-md">
+        <div class="flex flex-col max-w-80 h-[28rem] rounded drop-shadow-md bg-white">
             <img :src="img_path + img_src" class="w-full aspect-[320/192] object-cover rounded-t">
-            <div class="flex flex-col px-3 bg-white">
+            <div class="flex flex-col px-3">
                 <p class="font-medium text-xs mt-3">{{  formattedDate }}</p>
                 <p class="font-spartan font-medium text-xl mt-2 leading-5 line-clamp-3"> {{ post_title }} </p>
                 <p class="font-libre text-base mt-2 line-clamp-5"> {{post_desc}} </p>

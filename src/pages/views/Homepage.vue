@@ -1,11 +1,11 @@
 <template>
-    <div class="w-full relative h-full">
+    <RouterLink :to="'/post/'+ latest.id" class="w-full relative h-full">
         <div class="relative w-full h-[78vw]">
             <!-- Title Skeleton -->
             <div v-if="loading" class="absolute top-5 left-5 animate-pulse">
                 <div class="h-3.5 bg-gray-200 rounded-sm dark:bg-gray-700 w-16"></div>
             </div>
-            <div v-else class="absolute top-5 left-5">
+            <div v-else class="absolute top-5 left-5 bg-orange-400 px-0.5 py-0.5">
                 <i class="bi bi-lightning text-base text-white inline"></i>
                 <p class="text-sm text-white inline mx-[6px] font-medium">RECENT POST</p>
             </div>
@@ -13,9 +13,9 @@
             <div v-if="loading" class="absolute right-5 bottom-14 animate-pulse">
                 <div class="h-3.5 bg-gray-200 rounded-sm dark:bg-gray-700 w-16"></div>
             </div>
-            <div v-else class="absolute right-5 bottom-14 flex flex-row items-center">
+            <div v-else class="absolute right-5 bottom-14 flex flex-row items-center bg-orange-400 px-1 py-0.5">
                 <i class="bi bi-clock-history text-white text-base"></i>
-                <p class="text-sm text-white font-medium mx-[6px]">{{ latest.rtime }} MIN READ</p>
+                <p class="text-sm text-white font-medium ml-[6px]">{{ latest.rtime }} MIN READ</p>
             </div>
             <!-- Image Skeleton -->
             <div v-if="loading" class="flex items-center justify-center h-full w-full animate-pulse mb-4 bg-gray-300 dark:bg-gray-700">
@@ -52,7 +52,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </RouterLink>
     
     <div class="w-full mt-5">
         <div class="flex flex-row justify-between items-center font-spartan ml-7 mr-3">
