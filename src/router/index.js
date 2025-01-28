@@ -11,6 +11,7 @@ import PostEdit from '@/pages/views/PostEdit.vue'
 import UserRegister from '@/pages/views/UserRegister.vue'
 import UserLogin from '@/pages/views/UserLogin.vue'
 import EmailVerivication from'@/components/EmailConfirmation.vue'
+import NotFound from '@/pages/views/NotFound.vue'
 
 let registration_sent = false
 
@@ -77,6 +78,11 @@ const router = createRouter({
                     next('/signup')
                 }
             }
+        },
+        {
+            path: "/not-found",
+            name: "not-found",
+            component: NotFound,
         },
 
     ] 

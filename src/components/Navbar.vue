@@ -1,7 +1,7 @@
 <template>
     <nav id="navbar" class="fixed top-0 left-0 z-50">
         <div class="hidden md:flex flex-col">
-            <div class="h-[62px] w-screen flex flex-row items-center justify-between px-24 bg-base-navy z-50">
+            <div class="h-[62px] w-screen flex flex-row items-center justify-between px-24 md:px-12 bg-base-navy z-50">
                 <div>
                     <img class="h-9 w-auto" src="../assets/app_icons/logoipsum.svg" draggable="false">
                 </div>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="px-24 h-14 w-screen flex flex-row items-center justify-between border border-[#CCCCCC] bg-white z-50">
+            <div class="px-24 h-14 md:px-12 w-screen flex flex-row items-center justify-between border border-[#CCCCCC] bg-white z-50">
                 <div class="flex flex-row items-center text-lg">
                     <p class="mr-6 font-NotoSans">BLOG</p>
                     <button class="mr-4 px-4 py-1.5 rounded-sm hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 duration-200">

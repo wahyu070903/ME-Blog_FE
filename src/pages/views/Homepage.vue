@@ -1,60 +1,57 @@
 <template>
     <RouterLink :to="'/post/'+ latest.id" class="w-full relative h-full">
-        <div class="relative w-full h-[78vw]">
+        <div class="md:flex md:flex-row md:items-center md:px-8">
+            <div class="relative w-full">
             <!-- Title Skeleton -->
-            <div v-if="loading" class="absolute top-5 left-5 animate-pulse">
-                <div class="h-3.5 bg-gray-200 rounded-sm dark:bg-gray-700 w-16"></div>
+                <div v-if="!loading" class="absolute top-5 left-5 md:top-0 md:left-0 bg-orange-400 px-0.5 py-0.5">
+                    <i class="bi bi-lightning text-base text-white inline"></i>
+                    <p class="text-sm text-white inline mx-[6px] font-medium">RECENT POST</p>
+                </div>
+                <div v-if="!loading" class="absolute right-5 bottom-14 md:right-0 md:bottom-0 flex flex-row items-center bg-orange-400 px-1 py-0.5">
+                    <i class="bi bi-clock-history text-white text-base"></i>
+                    <p class="text-sm text-white font-medium ml-[6px]">{{ latest.rtime }} MIN READ</p>
+                </div>
+                <!-- Image Skeleton -->
+                <div v-if="loading" class="flex items-center justify-center h-full w-full md:w-full md:aspect-[72/46] animate-pulse mb-4 bg-gray-300 dark:bg-gray-700">
+                    <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                        <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
+                        <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                    </svg>
+                </div>
+                <div v-else class="md:w-full md:aspect-[72/46]">
+                    <img class="w-full h-full object-cover" :src=getImageUrl(latest.thumbnail)>
+                </div>
             </div>
-            <div v-else class="absolute top-5 left-5 bg-orange-400 px-0.5 py-0.5">
-                <i class="bi bi-lightning text-base text-white inline"></i>
-                <p class="text-sm text-white inline mx-[6px] font-medium">RECENT POST</p>
+            <!-- Content Skeleton -->
+            <div v-if="loading" class="w-full ml-7 -mt-6">
+                <div class="w-[68%]">
+                    <div class="h-4 bg-gray-200 rounded-md dark:bg-gray-700 w-48 mb-4"></div>
+                </div>
+                <div class="w-[90%]">
+                    <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                    <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 mb-2.5"></div>
+                    <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                    <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                    <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
             </div>
-            <!-- Read time Skeleton -->
-            <div v-if="loading" class="absolute right-5 bottom-14 animate-pulse">
-                <div class="h-3.5 bg-gray-200 rounded-sm dark:bg-gray-700 w-16"></div>
-            </div>
-            <div v-else class="absolute right-5 bottom-14 flex flex-row items-center bg-orange-400 px-1 py-0.5">
-                <i class="bi bi-clock-history text-white text-base"></i>
-                <p class="text-sm text-white font-medium ml-[6px]">{{ latest.rtime }} MIN READ</p>
-            </div>
-            <!-- Image Skeleton -->
-            <div v-if="loading" class="flex items-center justify-center h-full w-full animate-pulse mb-4 bg-gray-300 dark:bg-gray-700">
-                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                    <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
-                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
-                </svg>
-            </div>
-            <img v-else class="w-full h-full object-cover" :src=getImageUrl(latest.thumbnail)>
-        </div>
-        <!-- Content Skeleton -->
-        <div v-if="loading" class="w-full ml-7 -mt-6">
-            <div class="w-[68%]">
-                <div class="h-4 bg-gray-200 rounded-md dark:bg-gray-700 w-48 mb-4"></div>
-            </div>
-            <div class="w-[90%]">
-                <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
-                <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 mb-2.5"></div>
-                <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
-                <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
-                <div class="h-3 bg-gray-200 rounded-sm dark:bg-gray-700 max-w-[360px]"></div>
-            </div>
-        </div>
-        <div v-else class="w-full flex flex-col items-start ml-7 -mt-6">
-            <div class="font-spartan w-[68%]">
-                <p class="__highlighted text-2xl font-bold leading-3 text-black underline decoration-1">{{ latest.title }}</p>
-            </div>
-            <div class="font-libre w-[90%] mt-3">
-                <p class="text-base">
-                    {{ latest.description }}
-                    <br>
-                        <p class="text-base text-base-yellow">Read More ...</p>
-                    </br>
-                </p>
+            <div v-else class="w-full flex flex-col items-start ml-7 -mt-6 md:mt-1">
+                <div class="font-spartan w-[68%]">
+                    <p class="__highlighted text-2xl font-bold leading-3 text-black underline decoration-1">{{ latest.title }}</p>
+                </div>
+                <div class="font-libre w-[90%] mt-3">
+                    <p class="text-base">
+                        {{ latest.description }}
+                        <br>
+                            <p class="text-base text-base-yellow">Read More ...</p>
+                        </br>
+                    </p>
+                </div>
             </div>
         </div>
     </RouterLink>
     
-    <div class="w-full mt-5">
+    <div class="w-full mt-5 md:mt-10">
         <div class="flex flex-row justify-between items-center font-spartan ml-7 mr-3">
             <div class="flex flex-row items-center">
                 <i class="bi bi-stars text-base"></i>
