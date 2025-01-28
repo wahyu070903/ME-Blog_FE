@@ -5,7 +5,7 @@
 
 <template>
     <Navbar />
-    <div class="mt-[72px] md:mt-[118px] overflow-hidden">
+    <div class="mt-[72px] md:mt-[140px] overflow-hidden">
       <RouterView />
     </div>
     <Footer />
