@@ -1,15 +1,15 @@
 <template>
     <RouterLink :to="'/post/' + post_id">
-        <div ref="feedElement" class="hover:bg-gray-500/10">
+        <div ref="feedElement" class="hover:bg-gray-500/10 font-inter">
             <div class="relative w-full flex flex-col justify-center items-center pt-4 px-2">
                 <div class="relative w-full h-full">
                     <div class="relative max-w-[350px] mx-auto h-auto">
-                        <div class="flex flex-row items-center justify-between px-3 pb-1">
+                        <div class="flex flex-row items-center justify-between pb-1 text-[3.2vw]">
                             <div class="flex items-center">
-                                <i class="bi bi-pin-angle text-xs"></i>
-                                <p class="text-xs mx-0.5 ">{{ formattedDate }}</p>
+                                <i class="bi bi-pin-angle text-[3.6vw]"></i>
+                                <p class="mx-1">{{ formattedDate }}</p>
                             </div>
-                            <p class="text-xs font-sans">
+                            <p class="">
                                 {{ tag }}
                             </p>
                         </div>
@@ -35,15 +35,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- -mt-6 = text-2xl -->
-                    <div class="-mt-6 w-full h-auto">
+                    <div class="w-full h-auto mt-2.5">
                         <div class="w-[80%]">
-                            <p class="__highlighted text-2xl font-bold leading-3 text-black underline decoration-1">
+                            <p class="__highlighted line-clamp-3 text-[4.8vw] leading-[1.2] font-bold text-black">
                                 {{ title }}
                             </p>
                         </div>
                         <div class="w-full mt-3">
-                            <p class="font-libre">
+                            <p class="line-clamp-5 text-[4vw] leading-[1.3]">
                                 {{ description }}
                             </p>
                         </div>
@@ -71,23 +70,7 @@
     </RouterLink>
 </template>
 
-
-
-<style scoped>
-    .__taglabel{
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-    }
-    .__highlighted {
-        position: relative;
-        display: inline;
-        box-shadow: inset 0 -0.5em 0 rgb(255 165 0);
-    }
-</style>
-
 <script>
-import { RouterLink } from 'vue-router';
-
     export default{
         data(){
             return {
