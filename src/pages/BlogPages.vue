@@ -8,5 +8,5 @@
     <div class="__content_main mt-[72px] md:mt-[140px]">
       <RouterView />
     </div>
-    <!-- <Footer /> -->
+    <Footer />
 </template>

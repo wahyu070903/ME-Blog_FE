@@ -1,5 +1,5 @@
 <template>
-    <div class="__vcard_large w-full border-b border-b-gray-600/80 md:w-[300px]">
+    <div class="__top_card __vcard_large w-full border-b border-b-gray-600/80 md:w-[300px]">
         <div class="flex flex-col w-full items-center justify-between mb-2.5">
             <div class="w-[29vw] h-[17.45vw] md:h-[180px] md:w-[300px]">
                 <img class="w-full h-full object-cover" src="../assets/images/drone.jpg">
