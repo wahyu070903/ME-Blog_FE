@@ -16,7 +16,7 @@
                         <span class="font-medium text-[3.25vw] text-base-blue md:text-base">Read more ...</span>
                     </div>
                 </section>
-                <section class="mt-4 md:w-[650px] md:mx-auto xl:w-[600px]">
+                <section class="__top_card_gallery mt-4 md:w-[650px] md:mx-auto xl:w-[600px]">
                     <div class="grid grid-cols-1 px-4 space-y-4 md:flex md:flex-wrap md:justify-between md:px-0">
                         <template v-for="items in 2">
                             <HorizontalLargeCard
@@ -92,34 +92,44 @@
                 </template>
             </div>
         </div>
+        <div class="__categories_title px-4 mt-8 text-base-blue text-[3.2vw] font-bold md:text-[14px]">
+            CATEGORIES
+        </div>
+        <div class="w-full flex flex-row items-center px-4 flex-wrap justify-center space-x-12 space-y-2 py-8">
+            <div class="h-[6vw]">
+                <img src="../../assets/app_icons/logo-1.webp" class="w-full h-full">
+            </div>
+            <div class="h-[6vw]">
+                <img src="../../assets/app_icons/logo-2.webp" class="w-full h-full">
+            </div>
+            <div class="h-[6vw]">
+                <img src="../../assets/app_icons/logo-3.webp" class="w-full h-full">
+            </div>
+            <div class="h-[6vw]">
+                <img src="../../assets/app_icons/logo-4.webp" class="w-full h-full">
+            </div>
+            <div class="h-[6vw]">
+                <img src="../../assets/app_icons/logo-5.webp" class="w-full h-full">
+            </div>
+        </div>
     </div>
     <!-- new content -->
-    <section class="__post_feed px-4 bg-white mt-12">
+    <section class="__post_feed mx-4 bg-white mt-12 pb-4 md:max-w-[585px] md:mx-auto">
         <div class="flex flex-col w-full">
             <div class="__post_feed_title flex flex-row items-start self-start">
-                <i class="bi bi-filter-circle-fill text-lg"></i>
-                <div class="flex flex-col items-start mx-2 font-inter text-[3.2vw]">
-                    <p class="font-medium">Post Feed</p>
-                    <p class="font-medium">
+                <i class="bi bi-filter-circle-fill text-[4.18vw] md:text-[20px]"></i>
+                <div class="flex flex-col items-start mx-2 font-inter text-[3.2vw] md:text-[18px]">
+                    <p class="font-semibold">Post Feed</p>
+                    <p class="font-medium md:text-[14px]">
                         There is
                         <span class="text-base-blue">1024</span>
                         post now
                     </p>
                 </div>
             </div>
-            <div class="__post_feed_content self-center">
+            <div class="__post_feed_content self-center flex flex-col space-y-4">
                 <template v-for="(type, index) in feedPattern">
-                    <DetailedFeed v-if="type == 'embed'"
-                        :post_id="feed[index].id"
-                        :title="feed[index].title" 
-                        :description="feed[index].description" 
-                        :post_date="feed[index].created_at" 
-                        :rtime="feed[index].rtime" 
-                        :thumbnail="feed[index].thumbnail" 
-                        :tag="feed[index].tag" 
-                        :image_src="feed[index].thumbnail" />
-
-                    <LargeFeed v-else-if="type == 'large'" 
+                    <LargeFeed v-if="type == 'large'" 
                         :post_id="feed[index].id"
                         :title="feed[index].title" 
                         :description="feed[index].description" 
@@ -128,23 +138,39 @@
                         :thumbnail="feed[index].thumbnail" 
                         :tag="feed[index].tag" />
 
-                    <SmallFeed v-else 
+                    <SmallFeed v-else-if="type == 'small'" 
                         :post_id="feed[index].id"
                         :title="feed[index].title"
                         :post_date="feed[index].created_at" 
                         :rtime="feed[index].rtime" 
                         :thumbnail="feed[index].thumbnail" 
                         :tag="feed[index].tag"/>
+
+                    <SideFeed v-if="index == 3 || index == 6"/>
                 </template>
-                {{ feedPattern }}
             </div>
         </div>
     </section>
 </template>
     
-<style scoped>
+<style>
     .__hcard_title{
         width: calc(100% - 32.79vw);
+    }
+    
+    .__categories_title{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .__categories_title::after{
+        content: "";
+        display: block;
+        width: 100%; 
+        height: 1px; 
+        background-color: #4b5563;
+        opacity: 80; 
     }
 </style>
 

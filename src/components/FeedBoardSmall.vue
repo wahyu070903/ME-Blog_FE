@@ -1,33 +1,37 @@
 <template>
     <RouterLink :to="'/post/' + post_id">
-        <div class="pt-4 hover:bg-gray-500/10">
-            <div class="w-full px-2 mb-4">
-                <p class="text-xs underline decoration-1 decoration-base-yellow">{{ tag }}</p>
-                <div class="flex flex-row items-center mt-1.5">
-                    <div class="flex flex-col w-full">
-                        <p class="text-xl font-spartan font-bold leading-5 w-11/12 line-clamp-3">
+        <div class="hover:bg-gray-500/10 font-inter">
+            <div class="w-full mb-4">
+                <p class="text-[3.2vw] underline decoration-1 decoration-base-yellow text-gray-600 md:text-[14px]">
+                    {{ tag }}
+                </p>
+                <div class="flex flex-row items-start justify-between">
+                    <div class="flex flex-col">
+                        <p class="text-[4.8vw] font-bold leading-[1.2] w-11/12 line-clamp-3 md:text-[24px]">
                             {{ title }}
                         </p>
                         <div class="flex flex-row items-center mt-2">
-                            <p class="text-xs">{{ formattedDate }}</p>
+                            <p class="text-[3.2vw] md:text-[14px]">{{ formattedDate }}</p>
                             <div class="flex flex-row items-center mx-6">
-                                <i class="bi bi-clock-history text-xs"></i>
-                                <p class="text-xs mx-1.5">{{ rtime }} MIN READ</p>
+                                <i class="bi bi-clock-history text-[4vw] leading-none md:text-[16px]"></i>
+                                <p class="text-[3.2vw] leading-none mx-1.5 md:text-[14px]">
+                                    {{ rtime }} MIN READ
+                                </p>
                             </div>
                         </div>
                         <div class="mt-1 flex flex-row items-center">
-                            <div class="flex flex-row items-center">
-                                <i class="bi bi-hand-thumbs-up text-xs"></i>
-                                <p class="text-xs mx-1">10</p>
+                            <div class="flex flex-row items-start">
+                                <i class="bi bi-hand-thumbs-up text-[4vw] leading-none md:text-[16px]"></i>
+                                <p class="text-[3.2vw] leading-none mx-1 md:text-[14px]">10</p>
                             </div>
-                            <div class="flex flex-row items-center mx-2">
-                                <i class="bi bi-chat-left-dots text-xs"></i>
-                                <p class="text-xs mx-1">10</p>
+                            <div class="flex flex-row items-center text-center ml-5">
+                                <i class="bi bi-chat-left-dots text-[4vw] leading-none md:text-[16px]"></i>
+                                <p class="text-[3.2vw] mx-1 leading-none md:text-[14px]">10</p>
                             </div>
                         </div>
                     </div>
-                    <div class="max-w-20 max-h-20 rounded-sm">
-                        <img :src="img_path + thumbnail" class="w-full h-full object-cover aspect-[1/1] rounded-sm">
+                    <div class="min-w-[24.65vw] h-[24.65vw] md:min-w-[132px] md:h-[132px]">
+                        <img :src="img_path + thumbnail" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>

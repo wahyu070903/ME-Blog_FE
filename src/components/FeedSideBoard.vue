@@ -1,45 +1,52 @@
 <template>
     <div v-if="card_data.length" class="w-full flex justify-end items-end">
-        <div class="relative max-w-[294px] h-auto pt-3 px-3 my-8 rounded-t-md rounded-bl-md" :class="['bg-' + card_color]">
-            <div class="flex flex-row items-center justify-between">
-                <p class="text-xs uppercase">{{ card_topic }}</p>
-                <a href="#" class="text-xs underline decoration-1">SEE ALL TECHNOLOGY</a>
+        <div class="relative max-w-[68.37vw] h-auto pt-3 px-3 my-8 md:max-w-[530px]" :class="['bg-base-' + card_color]">
+            <div class="flex flex-row items-center justify-between text-[3.2vw] md:text-[14px]">
+                <p class="uppercase">{{ card_topic }}</p>
+                <a href="#" class="underline decoration-1">SEE ALL TECHNOLOGY</a>
             </div>
             <div class="w-[82%] ml-3 mt-3.5">
-                <p class="w-full text-2xl font-bold font-spartan leading-6 line-clamp-3">​​{{ card_data[0].title }}</p>
+                <p class="w-full text-[5.58vw] font-bold font-spartan leading-[1.2] line-clamp-3 md:text-[36px]">
+                    ​​{{ card_data[0].title }}
+                </p>
             </div>
-            <div class="mt-6 max-w-[222px]">
-                <div class="flex flex-row items-center justify-between">
-                    <p class="text-xs">{{ formattedDate(card_data[0].post_at) }}</p>
+            <div class="mt-6 max-w-[51.62vw] md:max-w-[400px]">
+                <div class="flex flex-row items-center justify-between text-[3.2vw] md:text-[14px]">
+                    <p class="">{{ formattedDate(card_data[0].post_at) }}</p>
                     <div class="flex flex-row items-center">
                         <div class="flex flex-row items-center">
-                            <i class="bi bi-hand-thumbs-up text-xs"></i>
-                            <p class="text-xs mx-1">10</p>
+                            <i class="bi bi-hand-thumbs-up text-[3.4vw] md:text-[16px]"></i>
+                            <p class="mx-1">10</p>
                         </div>
                         <div class="flex flex-row items-center ml-2">
-                            <i class="bi bi-chat-left-dots text-xs"></i>
-                            <p class="text-xs ml-1">10</p>
+                            <i class="bi bi-chat-left-dots text-[3.4vw] md:text-[16px]"></i>
+                            <p class="ml-1">10</p>
                         </div>
                     </div>
                 </div>
-                <img :src="getImageUrl(card_data[0].thumbnail)" class="w-full h-full aspect-[222/142] rounded-[4px] mt-1.5">
-            </div>
+                <div class="w-full h-[33vw] md:h-[240px]">
+                    <img :src="getImageUrl(card_data[0].thumbnail)" class="w-full h-full mt-1.5 object-cover">
+                </div>
+            </div>  
             <div class="w-11/12">
                 <div v-for="index in 2">
                     <div :class="index == 1 ? '__first-card':''" class="flex flex-row items-start py-3">
-                        <i class="bi bi-2-circle-fill text-[22px] text-white"></i>
+                        <i v-if="index == 1" class="bi bi-2-circle-fill text-[5.12vw] text-white md:text-[28px]"></i>
+                        <i v-else class="bi bi-3-circle-fill text-[5.12vw] text-white md:text-[28px]"></i>
                         <div class="flex flex-col mx-2">
-                            <p class="text-base font-spartan font-medium leading-4 line-clamp-3">{{ card_data[index].title }}</p>
+                            <p class="text-[3.72vw] font-medium leading-[1.2] line-clamp-3 md:text-[20px]">
+                                {{ card_data[index].title }}
+                            </p>
                             <div class="flex flex-row items-center mt-1.5">
-                                <p class="text-xs font-spartan">{{ formattedDate(card_data[index].post_at) }}</p>
-                                <div class="flex flex-row items-center ml-3.5">
+                                <p class="text-xs">{{ formattedDate(card_data[index].post_at) }}</p>
+                                <div class="flex flex-row items-center ml-3.5 text-[3.2vw] md:text-[14px]">
                                     <div class="flex flex-row items-center">
-                                        <i class="bi bi-hand-thumbs-up text-xs font-spartan"></i>
-                                        <p class="text-xs mx-1 font-spartan">10</p>
+                                        <i class="bi bi-hand-thumbs-up text-[3.4vw] md:text-[16px]"></i>
+                                        <p class="mx-1">10</p>
                                     </div>
                                     <div class="flex flex-row items-center ml-2">
-                                        <i class="bi bi-chat-left-dots text-xs font-spartan"></i>
-                                        <p class="text-xs ml-1 font-spartan">10</p>
+                                        <i class="bi bi-chat-left-dots text-[3.4vw] md:text-[16px]"></i>
+                                        <p class="ml-1">10</p>
                                     </div>
                                 </div>
                             </div>
@@ -48,17 +55,15 @@
                 </div>
             </div>
             <div class="absolute top-9 left-0 -translate-x-full">
-                <p class="__jumbo-label font-bayon text-[64px] leading-10">{{ card_topic }}</p>
+                <p class="__jumbo-label font-bayon text-[14.88vw] leading-[9.44vw]">
+                    {{ card_topic }}
+                </p>
             </div>
         </div>
     </div>
 </template>
 
 <style>
-    .__topic{
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-    }
     .__first-card{
         border-bottom: 2px solid white;
     }
@@ -90,20 +95,41 @@
             }
         },
         props : {
-            card_topic : String,
-            card_color : String,
+            card_topic : {
+                type: String,
+                default: "TECH"
+            },
+            card_color : {
+                type: String,
+                default: "blue"
+            },
             card_data : {
                 type : Object,
-                required : true,
-                default : () => {}
+                default : () => [
+                    {
+                        title : "Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.",
+                        post_at : "2025-01-11",
+                        thumbnail : "drone.jpg"
+                    },
+                    {
+                        title : "Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.",
+                        post_at : "2025-01-11",
+                        thumbnail : "drone.jpg"
+                    },
+                    {
+                        title : "Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.",
+                        post_at : "2025-01-11",
+                        thumbnail : "drone.jpg"
+                    }
+                ]
             }
         },
         methods :{
             getImageUrl(img_name){
                 return new URL(`../assets/images/${img_name}`, import.meta.url)
             },
-            formattedDate(){
-                let [year_now, day_now, month_now] = this.post_date.split("-")
+            formattedDate(date){
+                let [year_now, day_now, month_now] = date.split("-")
                 month_now = month_now.split('T')[0]
                 month_now = parseInt(month_now)
                 return `${this.month_format[month_now]} ${day_now}, ${year_now}`

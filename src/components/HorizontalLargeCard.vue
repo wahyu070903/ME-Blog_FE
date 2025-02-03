@@ -1,5 +1,5 @@
 <template>
-    <div class="__hcard_large w-full border-b border-b-gray-600/80">
+    <div class="__top_card __hcard_large w-full border-b border-b-gray-600/80">
         <div class="flex flex-row w-full items-center justify-between flex-wrap mb-2.5 md:flex-nowrap md:items-start">
             <div class="w-[29vw] h-[17.45vw] md:h-[180px] md:min-w-[300px] md:w-[300px] xl:min-w-[230px] xl:w-[230px] xl:h-[140px]">
                 <img class="w-full h-full object-cover" src="../assets/images/drone.jpg">

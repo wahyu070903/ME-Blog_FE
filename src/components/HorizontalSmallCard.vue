@@ -1,5 +1,5 @@
 <template>
-    <div class="__card_long w-full border-b border-b-gray-600/80 md:max-w-[300px]">
+    <div class="__top_card __card_long w-full border-b border-b-gray-600/80 md:max-w-[300px]">
         <div class="flex flex-col items-start">
             <div class="w-full">
                 <p class="__card_title font-bold text-[4.8vw] mb-3 line-clamp-3 leading-[1.2] md:text-[20px]">
