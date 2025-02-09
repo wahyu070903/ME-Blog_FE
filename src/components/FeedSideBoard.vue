@@ -1,6 +1,6 @@
 <template>
     <div v-if="card_data.length" class="w-full flex justify-end items-end">
-        <div class="relative max-w-[68.37vw] h-auto pt-3 px-3 my-8 md:max-w-[530px]" :class="['bg-base-' + card_color]">
+        <div class="relative max-w-[68.37vw] h-auto pt-3 px-3 md:max-w-[530px]" :class="['bg-base-' + card_color]">
             <div class="flex flex-row items-center justify-between text-[3.2vw] md:text-[14px]">
                 <p class="uppercase">{{ card_topic }}</p>
                 <a href="#" class="underline decoration-1">SEE ALL TECHNOLOGY</a>
@@ -28,7 +28,7 @@
                     <img :src="getImageUrl(card_data[0].thumbnail)" class="w-full h-full mt-1.5 object-cover">
                 </div>
             </div>  
-            <div class="w-11/12">
+            <div class="w-11/12 md:max-w-[400px]">
                 <div v-for="index in 2">
                     <div :class="index == 1 ? '__first-card':''" class="flex flex-row items-start py-3">
                         <i v-if="index == 1" class="bi bi-2-circle-fill text-[5.12vw] text-white md:text-[28px]"></i>
@@ -54,11 +54,14 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute top-9 left-0 -translate-x-full">
-                <p class="__jumbo-label font-bayon text-[14.88vw] leading-[9.44vw]">
+            <div class="absolute top-9 left-0 -translate-x-full md:translate-x-0 md:top-auto md:left-auto md:-bottom-1.5 md:right-0 z-20">
+                <p class="__jumbo-label font-bayon text-[14.88vw] leading-[9.44vw] md:text-[96px] md:leading-[60px] md:opacity-40">
                     {{ card_topic }}
                 </p>
             </div>
+            <!-- <div class="absolute bottom-0 right-0">
+                <p class="__jumbo-label text-[96px] bg-red-400 leading-[80px]">Hello</p>
+            </div> -->
         </div>
     </div>
 </template>
@@ -70,6 +73,7 @@
     .__jumbo-label{
         writing-mode: vertical-lr;
         transform: rotate(180deg);
+        display: inline-block;
     }
 </style>
 

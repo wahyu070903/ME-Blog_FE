@@ -1,6 +1,6 @@
 <template>
     <RouterLink :to="'/post/' + post_id">
-        <div class="hover:bg-gray-500/10 font-inter">
+        <div class="hover:bg-gray-500/10 font-inter max-w-[94.5vw] md:max-w-[585px]">
             <div class="w-full mb-4">
                 <p class="text-[3.2vw] underline decoration-1 decoration-base-yellow text-gray-600 md:text-[14px]">
                     {{ tag }}
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="min-w-[24.65vw] h-[24.65vw] md:min-w-[132px] md:h-[132px]">
+                    <div class="w-[24.65vw] h-[24.65vw] md:w-[132px] md:h-[132px] flex-shrink-0">
                         <img :src="img_path + thumbnail" class="w-full h-full object-cover">
                     </div>
                 </div>

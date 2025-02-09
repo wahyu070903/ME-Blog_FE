@@ -1,6 +1,6 @@
 <template>
     <RouterLink :to="'/post/' + post_id">
-        <div ref="feedElement" class="hover:bg-gray-500/10 font-inter pb-5 border-b border-b-gray-600/80">
+        <div ref="feedElement" class="hover:bg-gray-500/10 font-inter pb-5 border-b border-b-gray-600/80 max-w-[94.5vw] md:max-w-[585px]">
             <div class="relative w-full flex flex-col justify-center items-center pt-4 px-2">
                 <div class="relative w-full h-full flex flex-col">
                     <div class="relative mx-auto">
@@ -15,14 +15,14 @@
                                 {{ tag }}
                             </p>
                         </div>
-                        <div class="w-[81.4vw] h-[46.511vw] md:w-[455px] md:h-[260px]">
+                        <div class="relative w-[81.4vw] h-[46.511vw] md:w-[455px] md:h-[260px]">
                             <img :src="img_path + thumbnail" class="w-full h-full object-cover">
-                        </div>
-                        <div class="absolute top-10 left-0 -translate-x-full">
-                            <div class="w-fit px-1.5 py-2.5 rounded-tl-sm rounded-bl-sm bg-base-blue">
-                                <p class="__taglabel font-medium text-[3.2vw] leading-none text-white leading-1 md:text-[14px]">
-                                    COMPE
-                                </p>
+                            <div class="absolute top-0 left-0 -translate-x-full translate-y-0">
+                                <div class="w-fit px-1.5 py-2.5 rounded-tl-sm rounded-bl-sm bg-base-blue">
+                                    <p class="__taglabel font-medium text-[3.2vw] leading-none text-white leading-1 md:text-[14px]">
+                                        COMPE
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
