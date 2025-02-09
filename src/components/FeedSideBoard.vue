@@ -12,7 +12,7 @@
             </div>
             <div class="mt-6 max-w-[51.62vw] md:max-w-[400px]">
                 <div class="flex flex-row items-center justify-between text-[3.2vw] md:text-[14px]">
-                    <p class="">{{ formattedDate(card_data[0].post_at) }}</p>
+                    <p class="">{{ formattedDate(card_data[0].created_at) }}</p>
                     <div class="flex flex-row items-center">
                         <div class="flex flex-row items-center">
                             <i class="bi bi-hand-thumbs-up text-[3.4vw] md:text-[16px]"></i>
@@ -38,7 +38,7 @@
                                 {{ card_data[index].title }}
                             </p>
                             <div class="flex flex-row items-center mt-1.5">
-                                <p class="text-xs">{{ formattedDate(card_data[index].post_at) }}</p>
+                                <p class="text-xs">{{ formattedDate(card_data[index].created_at) }}</p>
                                 <div class="flex flex-row items-center ml-3.5 text-[3.2vw] md:text-[14px]">
                                     <div class="flex flex-row items-center">
                                         <i class="bi bi-hand-thumbs-up text-[3.4vw] md:text-[16px]"></i>
@@ -59,9 +59,6 @@
                     {{ card_topic }}
                 </p>
             </div>
-            <!-- <div class="absolute bottom-0 right-0">
-                <p class="__jumbo-label text-[96px] bg-red-400 leading-[80px]">Hello</p>
-            </div> -->
         </div>
     </div>
 </template>
@@ -112,17 +109,17 @@
                 default : () => [
                     {
                         title : "Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.",
-                        post_at : "2025-01-11",
+                        created_at : "2025-01-11",
                         thumbnail : "drone.jpg"
                     },
                     {
                         title : "Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.",
-                        post_at : "2025-01-11",
+                        created_at : "2025-01-11",
                         thumbnail : "drone.jpg"
                     },
                     {
                         title : "Boosting AI-Driven Innovation in 6G with the AI-RAN Alliance, 3GPP.",
-                        post_at : "2025-01-11",
+                        created_at : "2025-01-11",
                         thumbnail : "drone.jpg"
                     }
                 ]

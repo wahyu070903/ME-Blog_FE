@@ -8,28 +8,28 @@
                     </div>
                     <div class="w-full mb-4">
                         <div class="font-bold text-[7.46667vw] mb-2 font-montserrat leading-[1.2] md:text-[34px]">
-                            NASA Set Coverage for ULA , Astrobotic Artemis Robotic 
+                            {{ toppattern.jumbotron[0].title }} 
                         </div>
                         <p class="font-normal text-[4vw] leading-[1.3] md:text-base">
-                            NASA has recently announced a significant coverage agreement with United Launch Alliance (ULA) and Astrobotic for the upcoming Artemis robotic moon launch. This collaboration marks a key milestone.
+                           {{ toppattern.jumbotron[0].description }}
                         </p>
                         <span class="font-medium text-[3.25vw] text-base-blue md:text-base">Read more ...</span>
                     </div>
                 </section>
                 <section class="__top_card_gallery mt-4 md:w-[650px] md:mx-auto xl:w-[600px]">
                     <div class="grid grid-cols-1 px-4 space-y-4 md:flex md:flex-wrap md:justify-between md:px-0">
-                        <template v-for="items in 2">
+                        <template v-for="item in toppattern.toplarge">
                             <HorizontalLargeCard
-                                props_title = "Advancing Telepresence and Next-Generation Digital"
-                                props_tag   = "TECHNOLOGY"
-                                props_date  = "Jan 28, 2025"
+                                :props_title = "item.title"
+                                :props_tag   = "item.tag"
+                                :props_date  = "item.created_at"
                             />
                         </template>
-                        <template v-for="items in 6">
+                        <template v-for="item in toppattern.small">
                             <HorizontalSmallCard class="lg:hidden"
-                                props_title = "Advancing Telepresence and Next-Generation Digital"
-                                props_tag   = "TECHNOLOGY"
-                                props_date  = "Jan 28, 2025"   
+                                :props_title = "item.title"
+                                :props_tag   = "item.tag"
+                                :props_date  = "item.created_at"   
                             />
                         </template>
                         <!-- hidden default until lg -->
@@ -149,65 +149,91 @@
                             :thumbnail="feed[index].thumbnail" 
                             :tag="feed[index].tag"/>
 
-                        <SideFeed v-if="index == 3 || index == 6" class="my-8 xl:hidden"/>
+                        <SideFeed v-if="index == Math.ceil(feedPattern.length * 1/3)" class="my-8 xl:hidden"
+                            card_topic="TECH"
+                            card_color="blue"
+                            :card_data="technology"
+                        />
+                        <SideFeed v-if="index == Math.ceil(feedPattern.length * 2/3)" class="my-8 xl:hidden"
+                            card_topic="ELECTRONICS"
+                            card_color="yellow"
+                            :card_data="electronics"
+                        />
                     </template>
                 </div>
             </div>
             <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
                 <div class="flex flex-col space-y-4">
                     <template v-for="(type, index) in feedPattern">
-                        <LargeFeed v-if="type == 'large'" 
-                            :post_id="feed[index].id"
-                            :title="feed[index].title" 
-                            :description="feed[index].description" 
-                            :post_date="feed[index].created_at" 
-                            :rtime="feed[index].rtime" 
-                            :thumbnail="feed[index].thumbnail" 
-                            :tag="feed[index].tag" />
+                        <template v-if="index < (feedPattern.length / 2)">
+                            <LargeFeed v-if="type == 'large'" 
+                                :post_id="feed[index].id"
+                                :title="feed[index].title" 
+                                :description="feed[index].description" 
+                                :post_date="feed[index].created_at" 
+                                :rtime="feed[index].rtime" 
+                                :thumbnail="feed[index].thumbnail" 
+                                :tag="feed[index].tag" />
 
-                        <SmallFeed v-else-if="type == 'small'" 
-                            :post_id="feed[index].id"
-                            :title="feed[index].title"
-                            :post_date="feed[index].created_at" 
-                            :rtime="feed[index].rtime" 
-                            :thumbnail="feed[index].thumbnail" 
-                            :tag="feed[index].tag"/>
+                            <SmallFeed v-else-if="type == 'small'" 
+                                :post_id="feed[index].id"
+                                :title="feed[index].title"
+                                :post_date="feed[index].created_at" 
+                                :rtime="feed[index].rtime" 
+                                :thumbnail="feed[index].thumbnail" 
+                                :tag="feed[index].tag"/>
+                            </template>
                     </template>
                 </div>
                 <div class=" h-auto">
                     <div class="h-3/4">
-                        <SideFeed class="sticky top-[160px]" />
+                        <SideFeed class="sticky top-[160px]" 
+                            card_topic="TECH"
+                            card_color="blue"
+                            :card_data="technology"
+                        />
                     </div>
                 </div>
             </div>
             <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
                 <div class="flex flex-col space-y-4">
                     <template v-for="(type, index) in feedPattern">
-                        <LargeFeed v-if="type == 'large'" 
-                            :post_id="feed[index].id"
-                            :title="feed[index].title" 
-                            :description="feed[index].description" 
-                            :post_date="feed[index].created_at" 
-                            :rtime="feed[index].rtime" 
-                            :thumbnail="feed[index].thumbnail" 
-                            :tag="feed[index].tag" />
+                        <template v-if="index >= (feedPattern.length / 2)">
+                            <LargeFeed v-if="type == 'large'" 
+                                :post_id="feed[index].id"
+                                :title="feed[index].title" 
+                                :description="feed[index].description" 
+                                :post_date="feed[index].created_at" 
+                                :rtime="feed[index].rtime" 
+                                :thumbnail="feed[index].thumbnail" 
+                                :tag="feed[index].tag" />
 
-                        <SmallFeed v-else-if="type == 'small'" 
-                            :post_id="feed[index].id"
-                            :title="feed[index].title"
-                            :post_date="feed[index].created_at" 
-                            :rtime="feed[index].rtime" 
-                            :thumbnail="feed[index].thumbnail" 
-                            :tag="feed[index].tag"/>
+                            <SmallFeed v-else-if="type == 'small'" 
+                                :post_id="feed[index].id"
+                                :title="feed[index].title"
+                                :post_date="feed[index].created_at" 
+                                :rtime="feed[index].rtime" 
+                                :thumbnail="feed[index].thumbnail" 
+                                :tag="feed[index].tag"/>
+                            </template>
                     </template>
                 </div>
                 <div class=" h-auto">
                     <div class="h-3/4">
-                        <SideFeed class="sticky top-[160px]" />
+                        <SideFeed class="sticky top-[160px]" 
+                            card_topic="ELECTRONICS"
+                            card_color="yellow"
+                            :card_data="electronics"
+                        />
                     </div>
                 </div>
             </div>
         </div>
+        {{ topcontent }}
+
+        <p>damn</p>
+
+        {{ feed }}
     </section>
 </template>
     
@@ -262,9 +288,9 @@
             return {
                 loading : false,
                 error : '',
-                latest : {},
-                featured : {},
-                feed : {},
+                topcontent: [],
+                toppattern: null,
+                feed : [],
                 postcounter : 0,
                 technology :{},
                 electronics : {},
@@ -283,17 +309,21 @@
                     const resp_data = response.data.data;
                     this.splitFetchResponse(resp_data);
                     this.makeFeedPattern(this.feed);
+                    this.makeUpperPattern()
 
-                    console.log(this.feedPattern)
                     this.loading = false;
                 }catch(error){
                     this.error = 'ERROR Fetch data';
                 }
             },
             splitFetchResponse(response){
-                this.latest = response.latest;
-                this.featured = response.featured;
-                this.feed = response.feed;
+                response.feed.forEach((item, index)=>{
+                    if((index + 1) <= 11){
+                        this.topcontent.push(item)
+                    }else{
+                        this.feed.push(item)
+                    }
+                })
                 this.postcounter = response.postcount;
                 this.technology = response.tag_technology;
                 this.electronics = response.tag_electronic;
@@ -310,6 +340,30 @@
                         counter++;
                     }
                 });
+            },
+            makeUpperPattern(){
+                let newPattern = {
+                    "jumbotron" : [],
+                    "toplarge" : [],
+                    "small" : [],
+                    "botlarge" : []
+                }
+                console.log(this.topcontent.length)
+                this.topcontent.forEach((item, index)=>{
+                    if((index + 1) == 1){
+                        newPattern["jumbotron"].push(item)
+                    }else if((index + 1) <= 3){
+                        newPattern["toplarge"].push(item)
+                    }
+                    else if((index + 1) > (this.topcontent.length - 2)){
+                        newPattern["botlarge"].push(item)
+                    }else{
+                        newPattern["small"].push(item)
+                    }
+                })
+
+                this.toppattern = newPattern
+                console.log(this.toppattern)
             },
             getImageUrl(img_name){
                 const endpoint = 'http://127.0.0.1:8000/storage/thumbnail/'
