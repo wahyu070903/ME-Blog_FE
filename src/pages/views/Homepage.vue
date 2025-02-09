@@ -92,29 +92,31 @@
                 </template>
             </div>
         </div>
-        <div class="__categories_title px-4 mt-8 text-base-blue text-[3.2vw] font-bold md:text-[14px]">
-            CATEGORIES
-        </div>
-        <div class="w-full flex flex-row items-center px-4 flex-wrap justify-center space-x-12 space-y-2 py-8">
-            <div class="h-[6vw]">
-                <img src="../../assets/app_icons/logo-1.webp" class="w-full h-full">
+        <div class="mt-8 mx-4 md:w-[650px] md:mx-auto lg:w-[1000px] lg:mx-auto xl:w-[1300px]">
+            <div class="__categories_title text-base-blue text-[3.2vw] font-bold md:text-[14px]">
+                CATEGORIES
             </div>
-            <div class="h-[6vw]">
-                <img src="../../assets/app_icons/logo-2.webp" class="w-full h-full">
-            </div>
-            <div class="h-[6vw]">
-                <img src="../../assets/app_icons/logo-3.webp" class="w-full h-full">
-            </div>
-            <div class="h-[6vw]">
-                <img src="../../assets/app_icons/logo-4.webp" class="w-full h-full">
-            </div>
-            <div class="h-[6vw]">
-                <img src="../../assets/app_icons/logo-5.webp" class="w-full h-full">
+            <div class="w-full flex flex-row items-center px-4 flex-wrap justify-center space-x-12 space-y-2 py-8">
+                <div class="h-[6vw] md:h-[85px]">
+                    <img src="../../assets/app_icons/logo-1.webp" class="w-full h-full">
+                </div>
+                <div class="h-[6vw] md:h-[85px]">
+                    <img src="../../assets/app_icons/logo-2.webp" class="w-full h-full">
+                </div>
+                <div class="h-[6vw] md:h-[85px]">
+                    <img src="../../assets/app_icons/logo-3.webp" class="w-full h-full">
+                </div>
+                <div class="h-[6vw] md:h-[85px]">
+                    <img src="../../assets/app_icons/logo-4.webp" class="w-full h-full">
+                </div>
+                <div class="h-[6vw] md:h-[85px]">
+                    <img src="../../assets/app_icons/logo-5.webp" class="w-full h-full">
+                </div>
             </div>
         </div>
     </div>
     <!-- new content -->
-    <section class="__post_feed mx-4 bg-white mt-12 pb-4 md:max-w-[585px] md:mx-auto">
+    <section class="__post_feed mx-4 bg-white mt-12 pb-4 md:max-w-[585px] md:mx-auto xl:max-w-[1168px]">
         <div class="flex flex-col w-full">
             <div class="__post_feed_title flex flex-row items-start self-start">
                 <i class="bi bi-filter-circle-fill text-[4.18vw] md:text-[20px]"></i>
@@ -122,32 +124,88 @@
                     <p class="font-semibold">Post Feed</p>
                     <p class="font-medium md:text-[14px]">
                         There is
-                        <span class="text-base-blue">1024</span>
+                        <span class="text-base-blue">{{ postcounter }}</span>
                         post now
                     </p>
                 </div>
             </div>
-            <div class="__post_feed_content self-center flex flex-col space-y-4">
-                <template v-for="(type, index) in feedPattern">
-                    <LargeFeed v-if="type == 'large'" 
-                        :post_id="feed[index].id"
-                        :title="feed[index].title" 
-                        :description="feed[index].description" 
-                        :post_date="feed[index].created_at" 
-                        :rtime="feed[index].rtime" 
-                        :thumbnail="feed[index].thumbnail" 
-                        :tag="feed[index].tag" />
+            <div class="flex flex-row flex-nowrap space-x-14 xl:hidden">
+                <div class="__post_feed_content self-center flex flex-col space-y-4">
+                    <template v-for="(type, index) in feedPattern">
+                        <LargeFeed v-if="type == 'large'" 
+                            :post_id="feed[index].id"
+                            :title="feed[index].title" 
+                            :description="feed[index].description" 
+                            :post_date="feed[index].created_at" 
+                            :rtime="feed[index].rtime" 
+                            :thumbnail="feed[index].thumbnail" 
+                            :tag="feed[index].tag" />
 
-                    <SmallFeed v-else-if="type == 'small'" 
-                        :post_id="feed[index].id"
-                        :title="feed[index].title"
-                        :post_date="feed[index].created_at" 
-                        :rtime="feed[index].rtime" 
-                        :thumbnail="feed[index].thumbnail" 
-                        :tag="feed[index].tag"/>
+                        <SmallFeed v-else-if="type == 'small'" 
+                            :post_id="feed[index].id"
+                            :title="feed[index].title"
+                            :post_date="feed[index].created_at" 
+                            :rtime="feed[index].rtime" 
+                            :thumbnail="feed[index].thumbnail" 
+                            :tag="feed[index].tag"/>
 
-                    <SideFeed v-if="index == 3 || index == 6"/>
-                </template>
+                        <SideFeed v-if="index == 3 || index == 6" class="my-8 xl:hidden"/>
+                    </template>
+                </div>
+            </div>
+            <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
+                <div class="flex flex-col space-y-4">
+                    <template v-for="(type, index) in feedPattern">
+                        <LargeFeed v-if="type == 'large'" 
+                            :post_id="feed[index].id"
+                            :title="feed[index].title" 
+                            :description="feed[index].description" 
+                            :post_date="feed[index].created_at" 
+                            :rtime="feed[index].rtime" 
+                            :thumbnail="feed[index].thumbnail" 
+                            :tag="feed[index].tag" />
+
+                        <SmallFeed v-else-if="type == 'small'" 
+                            :post_id="feed[index].id"
+                            :title="feed[index].title"
+                            :post_date="feed[index].created_at" 
+                            :rtime="feed[index].rtime" 
+                            :thumbnail="feed[index].thumbnail" 
+                            :tag="feed[index].tag"/>
+                    </template>
+                </div>
+                <div class=" h-auto">
+                    <div class="h-3/4">
+                        <SideFeed class="sticky top-[160px]" />
+                    </div>
+                </div>
+            </div>
+            <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
+                <div class="flex flex-col space-y-4">
+                    <template v-for="(type, index) in feedPattern">
+                        <LargeFeed v-if="type == 'large'" 
+                            :post_id="feed[index].id"
+                            :title="feed[index].title" 
+                            :description="feed[index].description" 
+                            :post_date="feed[index].created_at" 
+                            :rtime="feed[index].rtime" 
+                            :thumbnail="feed[index].thumbnail" 
+                            :tag="feed[index].tag" />
+
+                        <SmallFeed v-else-if="type == 'small'" 
+                            :post_id="feed[index].id"
+                            :title="feed[index].title"
+                            :post_date="feed[index].created_at" 
+                            :rtime="feed[index].rtime" 
+                            :thumbnail="feed[index].thumbnail" 
+                            :tag="feed[index].tag"/>
+                    </template>
+                </div>
+                <div class=" h-auto">
+                    <div class="h-3/4">
+                        <SideFeed class="sticky top-[160px]" />
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -256,6 +314,25 @@
             getImageUrl(img_name){
                 const endpoint = 'http://127.0.0.1:8000/storage/thumbnail/'
                 return new URL(endpoint + img_name, import.meta.url);
+            },
+            sideContainerScroll(event){
+                const container = document.querySelector(".__sidefeed_container")
+                const bound = container.getBoundingClientRect();
+                if(!(bound.top <= window.innerHeight && bound.bottom > 0)){
+                    // container not visible
+                    return 
+                }
+                const cards = document.querySelectorAll(".__sidefeed_card")
+                const nav_height = document.querySelector("#navbar").offsetHeight
+                const sticky_point = nav_height
+                cards.forEach((element)=>{
+                    const element_bound = element.getBoundingClientRect()
+                    if(element_bound.top <= sticky_point){
+                        element.style.position = "sticky"
+                        element.style.top = sticky_point + "px"
+                        console.log("stick")
+                    }
+                })
             }
         },
         computed :{
@@ -269,6 +346,10 @@
         },
         mounted(){
             this.fetchData();
+            //window.addEventListener("scroll", this.sideContainerScroll);
+        },
+        onBeforeUnmount (){
+            //window.removeEventListener("scroll", this.sideContainerScroll);
         }
     }
 </script>
