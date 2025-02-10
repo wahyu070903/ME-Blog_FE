@@ -28,12 +28,12 @@
                     </div>
                     <div class="w-full mt-2.5 flex flex-col">
                         <div class="w-[80%]">
-                            <p class="__feed-large-title line-clamp-3 text-black md:text-[20px]">
+                            <p class="text-[4.8vw] leading-[1.2] font-bold line-clamp-3 text-black md:text-[20px] lg:text-[28px]">
                                 {{ title }}
                             </p>
                         </div>
                         <div class="w-full mt-3">
-                            <p class="__feed-large-btext line-clamp-5">
+                            <p class="text-[4vw] leading-[1.3] line-clamp-5 md:text-[16px] lg:text-[20px]">
                                 {{ description }}
                             </p>
                         </div>
@@ -64,30 +64,6 @@
     .__taglabel{
         writing-mode: vertical-rl;
         transform: rotate(180deg);
-    }
-
-    .__feed-large-title{
-        font-family: "Inter", serif;
-        font-size: 4.8vw;
-        line-height: 1.2;
-        font-weight: bold;
-    }
-
-    .__feed-large-btext{
-        font-family: "Inter", serif;
-        font-size: 4vw;
-        line-height: 1.3;
-        font-weight: normal;
-    }
-
-    @media (min-width: 768px){
-        .__feed-large-title{
-            font-size: 20px;
-        }
-
-        .__feed-large-btext{
-            font-size: 16px;
-        }
     }
 </style>
 
