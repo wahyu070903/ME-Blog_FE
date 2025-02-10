@@ -1,19 +1,38 @@
 <template>
-    <div v-if="post_fetch_status" class="mx-11">
-        <p class="mt-5 mb-1.5 font-spartan font-bold text-base leading-4">{{ title }}</p>
-        <div class="flex flex-row items-center mb-5">
-            <p class="text-xs">{{ formattedDate }}</p>
-            <p class="text-xs px-1 py-0.5 border mx-2.5 rounded-sm border-[#BABABA]">{{ tag }}</p>
+    <div v-if="post_fetch_status" class="flex flex-row py-5 justify-center">
+        <div>
+            <div class="mx-4 mb-4 md:mx-auto md:w-[650px] lg:w-[1000px]">
+                <div class="flex flex-row items-center space-x-2 font-inter font-medium text-[3.72vw] md:text-[16px] text-base-blue ">
+                    <a href="#" class="">HOME</a>
+                    <span class="">·</span>
+                    <a href="#" class="uppercase">{{ tag }}</a>
+                </div>
+                <div class="font-inter font-bold text-[7.44vw] md:text-[38px] leading-[1.2] mt-1.5">
+                    {{ title }}
+                </div>
+                <div class="mt-5 flex flex-col items-start font-inter text-[3.25vw] md:text-[14px]">
+                    <div class="font-semibold">
+                        {{ rtime }}
+                        <span>Minutes</span>
+                    </div>
+                    <div>
+                        Published
+                        <span>February 7, 2025 12.00 PM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-screen h-[60vw] md:w-[650px] md:h-[390px] md:mx-auto lg:w-[1000px] lg:h-[600px]">
+                <img :src="thumbnail_path + thumbnail" class="w-full h-full object-cover">
+            </div>
+            <!-- Keep ck-content class there -->
+            <div class="flex mx-4 mt-6 mb-2 md:w-[650px] md:mx-auto lg:w-[1000px] lg:justify-start xl:justify-center">
+                <div id="__content" v-html="content" class="ck-content prose xl:prose-lg text-[4.65vw] font-roboto tracking-wide leading-[1.4] md:text-[20px] md:w-full lg:w-[650px]"></div>
+            </div>
         </div>
-        <!-- Thumbnail -->
-        <div class="max-w-full h-56 ratio-[1/4] rounded">
-            <img :src="thumbnail_path + thumbnail" class="w-full h-full object-cover rounded">
+        <div class="__aside hidden xl:block w-[18vw]">
+
         </div>
-        <!-- Keep ck-content class there -->
-        <div id="__content" v-html="content" class="ck-content text-sm font-libre mt-6 mb-2">
-        
-        </div>
-        <div class="flex flex-row items-center justify-between border-b py-2.5 mb-3">
+        <!-- <div class="flex flex-row items-center justify-between border-b py-2.5 mb-3">
             <div class="flex flex-row items-center space-x-5">
                 <button class="flex flex-row items-center">
                     <i class="bi bi-hand-thumbs-up text-sm"></i>
@@ -41,9 +60,9 @@
                     <i class="bi bi-twitter-x text-sm"></i>
                 </a>
             </div>
-        </div>
+        </div> -->
         <!-- prev and next button -->
-        <div v-if="nextprev_fetch_status" class="flex flex-row items-center justify-between mb-10">
+        <!-- <div v-if="nextprev_fetch_status" class="flex flex-row items-center justify-between mb-10">
             <RouterLink :to="'/post/' + prevPost.id" v-if="prevPost" class="flex flex-row items-center space-x-1.5">
                 <i class="bi bi-arrow-left text-sm"></i>
                 <div class="max-w-40">
@@ -56,8 +75,8 @@
                 </div>
                 <i class="bi bi-arrow-right text-sm"></i>
             </RouterLink>
-        </div>
-        <form>
+        </div> -->
+        <!-- <form>
             <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                 <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                     <label for="comment" class="sr-only">Your comment</label>
@@ -89,12 +108,18 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </form> -->
+        <!-- <Comments />
         <Comments />
-        <Comments />
-        <Comments />
+        <Comments /> -->
     </div>
 </template>
+
+<style scoped>
+    ::v-deep(#__content a) {
+        color: #0496FF !important;
+    }
+</style>
 
 <script>
     import Comments from '@/components/Comment.vue'

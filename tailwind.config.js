@@ -24,11 +24,14 @@ export default {
         libre : ['Libre Baskerville', 'serif'],
         bayon : ['Bayon', 'sans-serif'],
         inter : ['Inter', 'serif'],
-        montserrat : ['Montserrat', 'serif']
+        montserrat : ['Montserrat', 'serif'],
+        robotofl: ['Roboto Flex', 'serif'],
+        roboto: ['Roboto', 'serif'],
       },
     },
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    require('@tailwindcss/typography')
   ],
 }

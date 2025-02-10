@@ -1,25 +1,28 @@
 <template>
     <div class="__homepage font-inter bg-base-navy text-white xl:px-4">
-        <div class="lg:flex lg:flex-row pt-6 justify-between lg:max-w-[1000px] lg:mx-auto xl:max-w-[1300px]">
+        <div v-if="toppattern != null" class="lg:flex lg:flex-row pt-6 justify-between lg:max-w-[1000px] lg:mx-auto xl:max-w-[1300px] xl:w-full">
             <div class="block">
                 <section class="__jumbotron flex flex-col mx-4 border-b border-b-gray-600/80 md:w-[650px] md:mx-auto xl:w-[600px]">
-                    <div class="w-full h-[58.14vw] mb-2.5 md:h-[390px] xl:h-[354px]">
-                        <img class="w-full h-full object-cover" src="../../assets/images/street.gif">
-                    </div>
-                    <div class="w-full mb-4">
-                        <div class="font-bold text-[7.46667vw] mb-2 font-montserrat leading-[1.2] md:text-[34px]">
-                            {{ toppattern.jumbotron[0].title }} 
+                    <RouterLink :to="'/post/' + toppattern.jumbotron[0].id">
+                        <div class="w-full h-[58.14vw] mb-2.5 md:h-[390px] xl:h-[354px]">
+                            <img class="w-full h-full object-cover" :src="'http://127.0.0.1:8000/storage/thumbnail/' + toppattern.jumbotron[0].thumbnail">
                         </div>
-                        <p class="font-normal text-[4vw] leading-[1.3] md:text-base">
-                           {{ toppattern.jumbotron[0].description }}
-                        </p>
-                        <span class="font-medium text-[3.25vw] text-base-blue md:text-base">Read more ...</span>
-                    </div>
+                        <div class="w-full mb-4">
+                            <div class="font-bold text-[7.46667vw] mb-2 font-montserrat leading-[1.2] md:text-[34px]">
+                                {{ toppattern.jumbotron[0].title }} 
+                            </div>
+                            <p class="font-normal text-[4vw] leading-[1.3] md:text-base">
+                            {{ toppattern.jumbotron[0].description }}
+                            </p>
+                            <span class="font-medium text-[3.25vw] text-base-blue md:text-base">Read more ...</span>
+                        </div>
+                    </RouterLink>
                 </section>
                 <section class="__top_card_gallery mt-4 md:w-[650px] md:mx-auto xl:w-[600px]">
                     <div class="grid grid-cols-1 px-4 space-y-4 md:flex md:flex-wrap md:justify-between md:px-0">
                         <template v-for="item in toppattern.toplarge">
                             <HorizontalLargeCard
+                                :props_id    = "item.id"
                                 :props_title = "item.title"
                                 :props_tag   = "item.tag"
                                 :props_date  = "item.created_at"
@@ -27,72 +30,80 @@
                         </template>
                         <template v-for="item in toppattern.small">
                             <HorizontalSmallCard class="lg:hidden"
+                                :props_id    = "item.id"
                                 :props_title = "item.title"
                                 :props_tag   = "item.tag"
                                 :props_date  = "item.created_at"   
                             />
                         </template>
                         <!-- hidden default until lg -->
-                        <template v-for="items in 2">
+                        <template v-for="item in toppattern.small.slice(0, 2)">
                             <HorizontalSmallCard class="hidden lg:block xl:hidden"
-                                props_title = "Advancing Telepresence and Next-Generation Digital"
-                                props_tag   = "TECHNOLOGY"
-                                props_date  = "Jan 28, 2025"   
+                                :props_id    = "item.id"
+                                :props_title = "item.title"
+                                :props_tag   = "item.tag"
+                                :props_date  = "item.created_at"   
                             />
                         </template>
-                        <template v-for="items in 2">
+                        <div v-for="item in toppattern.botlarge">
                             <HorizontalLargeCard class="md:hidden"
-                                props_title = "Advancing Telepresence and Next-Generation Digital"
-                                props_tag   = "TECHNOLOGY"
-                                props_date  = "Jan 28, 2025"
+                                :props_id    = "item.id"
+                                :props_title = "item.title"
+                                :props_tag   = "item.tag"
+                                :props_date  = "item.created_at"
                             />
                             <VerticalLargeCard class="hidden md:block lg:hidden"
-                                props_title = "Advancing Telepresence and Next-Generation Digital"
-                                props_tag   = "TECHNOLOGY"
-                                props_date  = "Jan 28, 2025"
+                                :props_id    = "item.id"
+                                :props_title = "item.title"
+                                :props_tag   = "item.tag"
+                                :props_date  = "item.created_at"
                             />
-                        </template>
+                        </div>
                     </div>
                 </section>
             </div>
             <div class="hidden lg:flex flex-col justify-between">
                 <div class="__rtop_segment space-y-4">
-                    <template v-for="items in 4">
+                    <template v-for="item in toppattern.small.slice(2)">
                         <HorizontalSmallCard class="hidden lg:block xl:hidden"
-                            props_title = "Advancing Telepresence and Next-Generation Digital"
-                            props_tag   = "TECHNOLOGY"
-                            props_date  = "Jan 28, 2025"   
+                            :props_id    = "item.id"
+                            :props_title = "item.title"
+                            :props_tag   = "item.tag"
+                            :props_date  = "item.created_at"   
                         />
                     </template>
-                    <template v-for="items in 6">
+                    <template v-for="item in toppattern.small">
                         <HorizontalSmallCard class="hidden xl:block "
-                            props_title = "Advancing Telepresence and Next-Generation Digital"
-                            props_tag   = "TECHNOLOGY"
-                            props_date  = "Jan 28, 2025"   
+                            :props_id    = "item.id"
+                            :props_title = "item.title"
+                            :props_tag   = "item.tag"
+                            :props_date  = "item.created_at"   
                         />
                     </template>
                 </div>
                 <div class="__tbot_segment space-y-4">
-                    <template v-for="items in 2">
+                    <template v-for="item in toppattern.botlarge">
                         <VerticalLargeCard class="hidden lg:block xl:hidden"
-                            props_title = "Advancing Telepresence and Next-Generation Digital"
-                            props_tag   = "TECHNOLOGY"
-                            props_date  = "Jan 28, 2025"
+                            :props_id    = "item.id"
+                            :props_title = "item.title"
+                            :props_tag   = "item.tag"
+                            :props_date  = "item.created_at"
                         />
                     </template>
                 </div>
             </div>
             <div class="hidden xl:flex flex-col justify-between">
-                <template v-for="items in 2">
+                <template v-for="item in toppattern.botlarge">
                     <VerticalLargeCard class="hidden lg:block"
-                        props_title = "Advancing Telepresence and Next-Generation Digital"
-                        props_tag   = "TECHNOLOGY"
-                        props_date  = "Jan 28, 2025"
+                        :props_id    = "item.id"
+                        :props_title = "item.title"
+                        :props_tag   = "item.tag"
+                        :props_date  = "item.created_at"
                     />
                 </template>
             </div>
         </div>
-        <div class="mt-8 mx-4 md:w-[650px] md:mx-auto lg:w-[1000px] lg:mx-auto xl:w-[1300px]">
+        <div class="mt-8 mx-4 md:w-[650px] md:mx-auto lg:w-[1000px] lg:mx-auto xl:max-w-[1300px] xl:w-full">
             <div class="__categories_title text-base-blue text-[3.2vw] font-bold md:text-[14px]">
                 CATEGORIES
             </div>
@@ -185,9 +196,9 @@
                             </template>
                     </template>
                 </div>
-                <div class=" h-auto">
+                <div class="h-auto">
                     <div class="h-3/4">
-                        <SideFeed class="sticky top-[160px]" 
+                        <SideFeed class="sticky top-[120px] overflow-hidden" 
                             card_topic="TECH"
                             card_color="blue"
                             :card_data="technology"
@@ -220,7 +231,7 @@
                 </div>
                 <div class=" h-auto">
                     <div class="h-3/4">
-                        <SideFeed class="sticky top-[160px]" 
+                        <SideFeed class="sticky top-[120px] overflow-hidden" 
                             card_topic="ELECTRONICS"
                             card_color="yellow"
                             :card_data="electronics"
@@ -229,11 +240,6 @@
                 </div>
             </div>
         </div>
-        {{ topcontent }}
-
-        <p>damn</p>
-
-        {{ feed }}
     </section>
 </template>
     

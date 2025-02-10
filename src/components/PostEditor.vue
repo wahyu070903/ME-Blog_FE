@@ -1,6 +1,6 @@
 <template>
     <!-- this shit should wrap in <div> dude i did'nt know why -->
-    <div class="">  
+    <div class="prose xl:prose-lg font-roboto tracking-wide leading-[1.4]">  
         <ckeditor
             v-model="editor_data"
             :editor="ClassicEditor"
@@ -9,6 +9,12 @@
         />
     </div>
 </template>
+
+<style scoped>
+    .prose{
+        max-width: 100%;
+    }
+</style>
 
 <script setup>
     import axios from 'axios';
@@ -214,6 +220,9 @@
                     "linkImage",
                 ],
                 styles: ["alignLeft", "alignCenter", "alignRight"],
+            },
+            mediaEmbed: {
+                previewsInData: true
             },
             ui: {
                 viewportOffset: {

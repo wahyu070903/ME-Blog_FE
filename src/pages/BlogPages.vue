@@ -4,8 +4,8 @@
 </script>
 
 <template>
-    <Navbar class="__navbar_main" />
-    <div class="__content_main mt-[72px] md:mt-[118px]">
+    <Navbar class="__navbar_main overflow-hidden" />
+    <div class="__content_main mt-[72px]">
       <RouterView />
     </div>
     <Footer />
