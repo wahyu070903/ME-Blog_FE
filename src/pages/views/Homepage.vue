@@ -171,6 +171,31 @@
                             :card_data="electronics"
                         />
                     </template>
+                    <div class="w-full flex items-center justify-center py-6 text-[3.2vw] md:text-[14px] font-semibold text-gray-600">
+                        <div class="flex flex-row items-center space-x-2">
+                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <a href="#" class="__pag-active h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                1
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                2
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                3
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                4
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                5
+                            </a>
+                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
@@ -228,6 +253,31 @@
                                 :tag="feed[index].tag"/>
                             </template>
                     </template>
+                    <div class="w-full flex items-center justify-center py-6 text-[3.2vw] md:text-[14px] font-semibold text-gray-800">
+                        <div class="flex flex-row items-center space-x-2">
+                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <a href="#" class="__pag-active h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                1
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                2
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                3
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                4
+                            </a>
+                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
+                                5
+                            </a>
+                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class=" h-auto">
                     <div class="h-3/4">
@@ -261,6 +311,12 @@
         height: 1px; 
         background-color: #4b5563;
         opacity: 80; 
+    }
+
+    .__pag-active {
+        color: white !important;
+        background-color: #0496FF;
+        border-radius: 100%;
     }
 </style>
 

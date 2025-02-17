@@ -125,6 +125,8 @@
     import Comments from '@/components/Comment.vue'
     import axios from 'axios';
     import 'ckeditor5/ckeditor5-content.css';
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/github.css'
     
     export default {
         data(){
@@ -191,6 +193,12 @@
                         this.thumbnail = response.thumbnail
 
                         this.post_fetch_status = true
+
+                        this.$nextTick(() =>{
+                            document.querySelectorAll("pre code").forEach((block) => {
+                                hljs.highlightElement(block)
+                            })
+                        })
                     })
                     .catch(error =>{
                         console.log(error)
@@ -220,6 +228,6 @@
                 month_now = parseInt(month_now)
                 return `${this.month_format[month_now]} ${day_now}, ${year_now}`
             }
-        }
+        },
     }
 </script>
