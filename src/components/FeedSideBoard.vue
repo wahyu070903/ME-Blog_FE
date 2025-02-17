@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="w-full h-[33vw] md:h-[240px]">
-                    <img :src="getImageUrl(card_data[0].thumbnail)" class="w-full h-full mt-1.5 object-cover">
+                    <img :src="img_path + card_data[0].thumbnail" class="w-full h-full mt-1.5 object-cover">
                 </div>
             </div>  
             <div class="w-11/12 md:max-w-[400px]">
