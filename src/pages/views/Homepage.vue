@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="flex flex-row flex-nowrap space-x-14 xl:hidden">
-                <div class="__post_feed_content self-center flex flex-col space-y-4">
+                <div class="__post_feed_content self-center flex flex-col space-y-4 max-w-[94.5vw] md:max-w-[650px]">
                     <template v-for="(type, index) in feedPattern">
                         <LargeFeed v-if="type == 'large'" 
                             :post_id="feed[index].id"
@@ -155,6 +155,7 @@
                         <SmallFeed v-else-if="type == 'small'" 
                             :post_id="feed[index].id"
                             :title="feed[index].title"
+                            :description="feed[index].description"
                             :post_date="feed[index].created_at" 
                             :rtime="feed[index].rtime" 
                             :thumbnail="feed[index].thumbnail" 
@@ -171,35 +172,13 @@
                             :card_data="electronics"
                         />
                     </template>
-                    <div class="w-full flex items-center justify-center py-6 text-[3.2vw] md:text-[14px] font-semibold text-gray-600">
-                        <div class="flex flex-row items-center space-x-2">
-                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <a href="#" class="__pag-active h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                1
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                2
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                3
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                4
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                5
-                            </a>
-                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <Paginator 
+                        :total_item="postcounter"
+                    />
                 </div>
             </div>
             <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
-                <div class="flex flex-col space-y-4">
+                <div class="flex flex-col space-y-4 max-w-[94.5vw] md:max-w-[650px]">
                     <template v-for="(type, index) in feedPattern">
                         <template v-if="index < (feedPattern.length / 2)">
                             <LargeFeed v-if="type == 'large'" 
@@ -214,6 +193,7 @@
                             <SmallFeed v-else-if="type == 'small'" 
                                 :post_id="feed[index].id"
                                 :title="feed[index].title"
+                                :description="feed[index].description"
                                 :post_date="feed[index].created_at" 
                                 :rtime="feed[index].rtime" 
                                 :thumbnail="feed[index].thumbnail" 
@@ -232,7 +212,7 @@
                 </div>
             </div>
             <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
-                <div class="flex flex-col space-y-4">
+                <div class="flex flex-col space-y-4 max-w-[94.5vw] md:max-w-[650px]">
                     <template v-for="(type, index) in feedPattern">
                         <template v-if="index >= (feedPattern.length / 2)">
                             <LargeFeed v-if="type == 'large'" 
@@ -247,37 +227,16 @@
                             <SmallFeed v-else-if="type == 'small'" 
                                 :post_id="feed[index].id"
                                 :title="feed[index].title"
+                                :description="feed[index].description"
                                 :post_date="feed[index].created_at" 
                                 :rtime="feed[index].rtime" 
                                 :thumbnail="feed[index].thumbnail" 
                                 :tag="feed[index].tag"/>
                             </template>
                     </template>
-                    <div class="w-full flex items-center justify-center py-6 text-[3.2vw] md:text-[14px] font-semibold text-gray-800">
-                        <div class="flex flex-row items-center space-x-2">
-                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <a href="#" class="__pag-active h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                1
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                2
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                3
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                4
-                            </a>
-                            <a href="#" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center">
-                                5
-                            </a>
-                            <button class="h-[9.2vw] w-[9.2vw] md:h-10 md:w-10 text-center">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <Paginator
+                        :total_item="postcounter"
+                    />
                 </div>
                 <div class=" h-auto">
                     <div class="h-3/4">
@@ -312,12 +271,6 @@
         background-color: #4b5563;
         opacity: 80; 
     }
-
-    .__pag-active {
-        color: white !important;
-        background-color: #0496FF;
-        border-radius: 100%;
-    }
 </style>
 
 <script>
@@ -333,6 +286,7 @@
     import HorizontalLargeCard from '@/components/HorizontalLargeCard.vue';
     import HorizontalSmallCard from '@/components/HorizontalSmallCard.vue';
     import VerticalLargeCard from '@/components/VerticalLargeCard.vue';
+    import Paginator from '@/components/Paginator.vue';
 
     export default{
         components : {
@@ -345,6 +299,7 @@
             HorizontalLargeCard,
             HorizontalSmallCard,
             VerticalLargeCard,
+            Paginator,
         },
         data(){
             return {
@@ -410,7 +365,6 @@
                     "small" : [],
                     "botlarge" : []
                 }
-                console.log(this.topcontent.length)
                 this.topcontent.forEach((item, index)=>{
                     if((index + 1) == 1){
                         newPattern["jumbotron"].push(item)
@@ -425,47 +379,22 @@
                 })
 
                 this.toppattern = newPattern
-                console.log(this.toppattern)
             },
             getImageUrl(img_name){
                 const endpoint = 'http://127.0.0.1:8000/storage/thumbnail/'
                 return new URL(endpoint + img_name, import.meta.url);
             },
-            sideContainerScroll(event){
-                const container = document.querySelector(".__sidefeed_container")
-                const bound = container.getBoundingClientRect();
-                if(!(bound.top <= window.innerHeight && bound.bottom > 0)){
-                    // container not visible
-                    return 
-                }
-                const cards = document.querySelectorAll(".__sidefeed_card")
-                const nav_height = document.querySelector("#navbar").offsetHeight
-                const sticky_point = nav_height
-                cards.forEach((element)=>{
-                    const element_bound = element.getBoundingClientRect()
-                    if(element_bound.top <= sticky_point){
-                        element.style.position = "sticky"
-                        element.style.top = sticky_point + "px"
-                        console.log("stick")
-                    }
-                })
-            }
         },
         computed :{
             getFeedPattern(){
                 let counter = 0;
                 const result = this.feedPattern[counter];
-                console.log(counter);
                 this.feedCounter++;
                 return result;
             },
         },
         mounted(){
             this.fetchData();
-            //window.addEventListener("scroll", this.sideContainerScroll);
-        },
-        onBeforeUnmount (){
-            //window.removeEventListener("scroll", this.sideContainerScroll);
         }
     }
 </script>

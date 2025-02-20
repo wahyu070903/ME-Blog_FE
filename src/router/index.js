@@ -12,6 +12,7 @@ import UserRegister from '@/pages/views/UserRegister.vue'
 import UserLogin from '@/pages/views/UserLogin.vue'
 import EmailVerivication from'@/components/EmailConfirmation.vue'
 import NotFound from '@/pages/views/NotFound.vue'
+import HomePaginate from '@/pages/views/HomePaginate.vue'
 
 let registration_sent = false
 
@@ -32,7 +33,12 @@ const router = createRouter({
                     path: "post/:id",
                     name: "post",
                     component : Post
-                }      
+                },
+                {
+                    path: "/page/:num",
+                    name: "pagination",
+                    component: HomePaginate
+                }  
             ]
         },
         {
