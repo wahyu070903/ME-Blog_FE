@@ -1,6 +1,6 @@
 <template>
     <RouterLink :to="'/post/' + post_id">
-        <div class="hover:bg-gray-500/10 font-inter max-w-[94.5vw] md:max-w-[585px]">
+        <div class="hover:bg-gray-500/10 font-inter">
             <div class="w-full mb-4">
                 <p class="text-[3.2vw] underline decoration-1 decoration-base-yellow text-gray-600 md:text-[14px]">
                     {{ tag }}
@@ -19,20 +19,15 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="mt-1 flex flex-row items-center">
-                            <div class="flex flex-row items-start">
-                                <i class="bi bi-hand-thumbs-up text-[4vw] leading-none md:text-[16px]"></i>
-                                <p class="text-[3.2vw] leading-none mx-1 md:text-[14px]">10</p>
-                            </div>
-                            <div class="flex flex-row items-center text-center ml-5">
-                                <i class="bi bi-chat-left-dots text-[4vw] leading-none md:text-[16px]"></i>
-                                <p class="text-[3.2vw] mx-1 leading-none md:text-[14px]">10</p>
-                            </div>
-                        </div>
                     </div>
-                    <div class="w-[24.65vw] h-[24.65vw] md:w-[132px] md:h-[132px] flex-shrink-0">
+                    <div class="w-[32vw] h-[24.65vw] md:w-[200px] md:h-[132px] flex-shrink-0">
                         <img :src="img_path + thumbnail" class="w-full h-full object-cover">
                     </div>
+                </div>
+                <div class="mt-4 flex flex-row items-center">
+                    <p class="text-[4vw] leading-[1.3] line-clamp-2 md:text-[16px] lg:text-[20px] text-gray-600">
+                        {{ description }}
+                    </p>
                 </div>
             </div>
             <div class="h-0.5 w-full bg-[#D9D9D9]"></div>
@@ -65,6 +60,7 @@
         props: {
             post_id : Number,
             title : String,
+            description : String,
             post_date : String,
             tag : String,
             thumbnail : String,

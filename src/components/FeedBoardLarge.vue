@@ -1,7 +1,7 @@
 <template>
     <RouterLink :to="'/post/' + post_id">
-        <div ref="feedElement" class="hover:bg-gray-500/10 font-inter pb-5 border-b border-b-gray-600/80 max-w-[94.5vw] md:max-w-[585px]">
-            <div class="relative w-full flex flex-col justify-center items-center pt-4 px-2">
+        <div ref="feedElement" class="hover:bg-gray-500/10 font-inter pb-5 border-b border-b-gray-600/80">
+            <div class="relative w-full flex flex-col justify-center items-center pt-4">
                 <div class="relative w-full h-full flex flex-col">
                     <div class="relative mx-auto">
                         <div class="flex flex-row items-center justify-between pb-1 text-[3.2vw] md:text-[14px]">
