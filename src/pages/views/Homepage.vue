@@ -172,9 +172,9 @@
                             :card_data="electronics"
                         />
                     </template>
-                    <Paginator 
+                    <!-- <Paginator 
                         :total_item="postcounter"
-                    />
+                    /> -->
                 </div>
             </div>
             <div class="hidden relative h-auto xl:flex flex-row flex-nowrap space-x-14">
@@ -234,9 +234,9 @@
                                 :tag="feed[index].tag"/>
                             </template>
                     </template>
-                    <Paginator
+                    <!-- <Paginator
                         :total_item="postcounter"
-                    />
+                    /> -->
                 </div>
                 <div class=" h-auto">
                     <div class="h-3/4">

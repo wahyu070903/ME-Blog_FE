@@ -7,6 +7,7 @@
                 </div>
                 <Paginator v-if="count_success"
                     :total_item="post_count"
+                    :active_page="paginate_page"
                 />
             </div>
             <div class="flex flex-col py-10 space-y-4">
@@ -24,12 +25,14 @@
             </div>
             <Paginator v-if="count_success"
                 :total_item="post_count"
+                :active_page="paginate_page"
             />
         </div>
         <div class="__aside hidden xl:block w-1/5 h-full">
             
         </div>
     </div>
+    {{ paginate_page }}
 </template>
 
 <script>
@@ -48,6 +51,7 @@
                 post_count: null,
                 count_success: null,
                 fetch_success: null,
+                paginate_page: null,
             }
         },
         methods: {
@@ -78,6 +82,7 @@
         mounted(){
             this.countPost()
             this.fetchPaginate()
+            this.paginate_page = Number(this.$route.params.num) 
         }
     }
 </script>
