@@ -10,16 +10,16 @@
                     :active_page="paginate_page"
                 />
             </div>
-            <div class="flex flex-col py-10 space-y-4">
-                <template v-for="i in 20">
+            <div v-if="fetch_success" class="flex flex-col py-10 space-y-4">
+                <template v-for="item in posts">
                     <SmallFeed 
-                        :post_id="i"
-                        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis, lacus at fringilla rutrum, lacus sapien scelerisque tellus, sit amet dapibus nibh ex rutrum odio. "
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis, lacus at fringilla rutrum, lacus sapien scelerisque tellus, sit amet dapibus nibh ex rutrum odio. "
-                        post_date="2025-10-2" 
-                        :rtime=5
-                        thumbnail="drone.jpg" 
-                        tag="TECH"
+                        :post_id="item.id"
+                        :title="item.title"
+                        :description="item.description"
+                        :post_date="item.created_at" 
+                        :rtime="item.rtime"
+                        :thumbnail="item.thumbnail" 
+                        :tag="item.tag"
                     />        
                 </template>
             </div>
@@ -32,7 +32,6 @@
             
         </div>
     </div>
-    {{ paginate_page }}
 </template>
 
 <script>
@@ -52,15 +51,16 @@
                 count_success: null,
                 fetch_success: null,
                 paginate_page: null,
+                paginate_perpage: 20,
             }
         },
         methods: {
             async fetchPaginate(){
                 const endpoint = 'http://127.0.0.1:8000/api/paginate/'
-                axios.get(endpoint + '0')
+                axios.get(endpoint + (this.paginate_page * this.paginate_page))
                 .then(response =>{
                     response = response.data
-                    posts = response.data
+                    this.posts = response.data
                     this.fetch_success = true
                 })
                 .catch(error =>{
@@ -77,6 +77,13 @@
                 .catch(error =>{
                     this.count_success = false
                 })
+            }
+        },
+        watch: {
+            '$route.params.num' (newPage){
+                this.paginate_page = parseInt(newPage) || 1
+                this.fetch_success = false
+                this.fetchPaginate()
             }
         },
         mounted(){
