@@ -5,7 +5,7 @@
                 <i class="bi bi-chevron-left"></i>
             </button>
             <template v-for="item in getPaginateArr">
-                <a href="#" :class="{'__pag-active': item == getRouterNum}" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center" >
+                <a v-on:click="paginateGoto(item)" :class="{'__pag-active': item == current_page}" class="h-[7.45vw] w-[7.45vw] md:h-8 md:w-8 flex items-center justify-center" >
                     {{ item }}
                 </a>
             </template>
@@ -30,7 +30,7 @@
             return {
                 max_visible_paginate: 5,
                 per_page: 20,
-                current_page: null,
+                current_page: parseInt(this.$route.params.num) || 1,
             }
         },
         props: {
@@ -53,14 +53,35 @@
             paginatePrev(){
                 if(this.current_page > 1){
                     const target = this.current_page - 1
+                    if(target == 1){
+                        this.$router.push({
+                            name: "homepage"
+                        })  
+                    }else{
+                        this.$router.push({
+                            name: "pagination",
+                            params: {
+                                num: target
+                            }
+                        })
+                    }
+                    this.current_page--
+                }
+            },
+            paginateGoto(target){
+                if(target == 1){
+                    this.$router.push({
+                        name: "homepage"
+                    })   
+                }else{
                     this.$router.push({
                         name: "pagination",
                         params: {
                             num: target
                         }
                     })
-                    this.current_page--
                 }
+                this.current_page = target
             }
         },
         computed: {
@@ -71,19 +92,19 @@
                 const r_offset = total_button - offset
 
                 let newArray = [];
-                if(this.$route.params.num < l_offset + 1){
+                if(this.current_page < l_offset + 1){
                     for(let i = 1 ; i <= this.max_visible_paginate; i++){
                         newArray.push(i)
                     }
                 }
-                else if(this.$route.params.num > r_offset){
+                else if(this.current_page > r_offset){
                     for(let i = total_button ; i > total_button-this.max_visible_paginate; i--){
                         newArray.push(i)
                     }
                     newArray.reverse()
                 }
                 else{
-                    for(let i = this.$route.params.num - offset; i <= this.$route.params.num + offset ; i++){
+                    for(let i = this.current_page - offset; i <= this.current_page + offset ; i++){
                         newArray.push(i);
                     }
                 }
@@ -92,8 +113,10 @@
             paginate_totalPaginateButton() {
                 return Math.ceil(this.total_item / this.per_page);
             },
-            getRouterNum(){
-                return this.$route.params.num
+        },
+        watch: {
+            '$route.params.num' (newPage){
+                this.current_page = parseInt(newPage) || 1
             }
         },
         mounted(){
