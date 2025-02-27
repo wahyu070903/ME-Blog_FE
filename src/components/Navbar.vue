@@ -2,9 +2,9 @@
     <nav id="navbar" class="fixed top-0 left-0 z-50 w-full overflow-hidden bg-black">
         <div class="hidden md:flex flex-col xl:mx-4">
             <div class="h-[72px] w-screen flex flex-row items-center justify-between mx-4 md:mx-auto md:w-[650px] lg:w-[1000px] xl:max-w-[1300px] xl:w-full">
-                <div>
-                    <img class="h-9 w-auto" src="../assets/app_icons/logoipsum.svg" draggable="false">
-                </div>
+                <RouterLink to="/">
+                    <img class="h-9 w-auto" src="../assets/app_icons/app-logo-inline.svg" draggable="false">
+                </RouterLink>
                 <div>
                     <div class="flex flex-row items-center">
                         <div class="flex flex-row items-center">
@@ -22,9 +22,9 @@
         </div>
         <!-- Mobile size modal -->
         <div class="relative w-screen flex flex-wrap items-center justify-between py-4 pl-4 pr-2 z-50 bg-black md:hidden">
-            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img class="h-9 w-auto" src="../assets/app_icons/logoipsum.svg" draggable="false">
-            </a>
+            <RouterLink to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img class="h-9 w-auto" src="../assets/app_icons/app-logo-inline.svg" draggable="false">
+            </RouterLink>
             <!-- Language Option -->
             <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
                 <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center px-3 py-1.5 text-sm text-white rounded-lg cursor-pointer hover:bg-gray-700 hover:text-white">
@@ -129,6 +129,7 @@
 <script>
     import { initFlowbite} from 'flowbite'
     import anime from 'animejs/lib/anime.es.js';
+import { RouterLink } from 'vue-router';
 
     export default{
         data(){

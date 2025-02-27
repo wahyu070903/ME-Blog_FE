@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         'base-yellow' : '#FFA500',
+        'base-yellowlight' : '#E69500',
         'base-navy'   : '#001B28',
         'base-blue'   : '#0496FF',
       },
